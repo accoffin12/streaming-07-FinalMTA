@@ -40,6 +40,8 @@ Traditionally Log files are not uploaded to GitHub, however, as this is a stream
 | v2_listenining_worker.py | BaseCode_Samples folder | python script |
 | requriements.txt | main repo | text doc |
 | MTA_SubwayHR_June22.csv | main repo | CSV |
+| aboutenv.txt | utils\util_outputs | text |
+| util_about.txt | utils\util_outputs | text |
 # 2. Machine Specs
 
 # 3. Prerequisites
