@@ -3,6 +3,16 @@
 > NW Missouri State University | CSIS: 44671-80/81: Data Streaming | Dr. Case
 
 # Overview: 
+Weekly approximatly 5.5 million people use the Subway in New York City, annually the number of passengers recorded in 2019 was 1.598 billion. The NYC Subway system has a total of  24 subway lines and 472 stations throughout Manhattan, Brooklyn, Queens, and the Bronx with a staggering 665 miles of mainline track. The Subways in New York are a lifeline for residents and businesses, which opperates 24 hours a day, 7 days a week. It's one of the busiest transportation systems with a complex network of track, stops and hubs running through out 4 of the 5 Bouroughs. 
+
+This project was designed to collect data from a modified CSV file that will be streamed through RabbitMQ, a message broker to simulate the process of filtering and collecting data from a data stream. There are several goals that we will be fullfilling:
+
+* Filtering out the data based on stations on the Number 7 Train Line.
+* Creating an alert for when a station is busy based on the number of passengers at it for Grand Central.
+* Creating another alert for if a station is busy for Hunters Point. 
+
+Two of these will require the use of windowing to create alerts, and the first will be an example of collecting data and exporting it to CSV. 
+Traditionally Log files are not uploaded to GitHub, however, as this is a streaming project these logs have been left as a way to demonstrate the success of the project.
 
 # Table of Contents
 1. [File List](File_List)
@@ -58,6 +68,8 @@ NYC MTA Data for Subways: https://data.ny.gov/Transportation/MTA-Subway-Hourly-R
 
 The New York City Subway system has 24 subway lines and 472 stations throughout Manhattan, Brooklyn, Queens, and the Bronx. Staten Island does not have a subway system but a ferry system and an above-ground train. The lines are listed in the chart based on their Line Reference. Some Lines do have local express services that share a line but stop at different stations. For the full MTA Subway Map view [Subway Map.pdf](Maps/Subway%20Map.pdf).
 
+In 2019 an average of 5.5 million people ride the subway weekly. According to the MTA the anual rideship is 1.598 billion people in 2019. There are seven numbered routes and 15 letter routes, not including the shuttles. The system consists of 6,684 subway cars and 665 miles of mainline track. 
+
 | Line Reference | Line Name | Area of NYC |
 | ----- | ----- | ----- |
 | 1, 2, 3 | Red Line | Runs along the west side of Manhattan |
@@ -75,6 +87,20 @@ The New York City Subway system has 24 subway lines and 472 stations throughout 
 | Z | Jamaica Line | Connects Brooklyn and Queens |
 
 ![MTA Subway Map](Maps/SubwayMap.PNG)
+
+In 2019 the Busiest subway stations Accordign to the MTA were as Follows:
+| Rank | Station/Complex | Lines | Annual ridership |
+| ----- | ----- | ----- | ----- |
+| 1 | Times Sq-42St/42 St | N, Q, R, W, S, 1, 2, 3, 7, A, C, E | 65,020,294 |
+| 2 | Grand Central-42 St | S, 4, 5, 6, 7 | 45,745,700 |
+| 3 | 34 St-Herald Sq | B, D, F, M, N, Q, R, W | 39,385,436 |
+| 4 | 14 St-Union Sq | L, N, Q, R, W, 4, 5, 6 | 32,385,260 |
+| 5 | Fulton St | A, C, J, Z, 2, 3, 4, 5 | 27,715,365 |
+| 6 | 34 St-Penn Station | 1, 2, 3 | 25,967,676 |
+| 7 | 34 St-Penn Station | A, C, E | 25,631,364 |
+| 8 | 59 St-Columbus Circle | A, B, C, D, 1 | 23,040,650 |
+| 9 | Chambers St, WTC /Park Pl/Cortlandt | A, C, E, 2, 3, R, W | 20,820,549|
+| 10 | Lexington Av-53 St/51 St | E, M, 6 | 18,957,465 |
 
 
 # 6. Modifications of Data
@@ -141,6 +167,7 @@ In this assignment base code that was developed by Dr. Case in her repository, "
 
 # 11. References
 - MTA Subway Data from NYC Open Portal, Downloaded: 04 May 2024: [https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data)
+- MTA (14 April 2020). Subway and Bus facts 2019 Facts. Accessed: 07 June 2024: https://new.mta.info/agency/new-york-city-transit/subway-bus-facts-2019 
 - Pika Documentation: [Pika GitHub](https://github.com/pika/pika)
 - M4 Streaming multiple consumers by accoffin12: [streaming-04-multiple-consumers](https://github.com/accoffin12/streaming-04-multiple-consumers)
 - M4-Bonus Repo Exploring MTA Data by accoffin12:   [streaming-04-bonus-ACoffin](ttps://github.com/accoffin12/streaming-04-bonus-ACoffin)
