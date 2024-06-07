@@ -29,8 +29,7 @@
 | v2_emitter_of_tasks.py | BaseCode_Samples folder | python script |
 | v2_listenining_worker.py | BaseCode_Samples folder | python script |
 | requriements.txt | main repo | text doc |
-| MTA_Subway_Hourly_Ridership__Beginning_February_2022_20240504.csv | OriginalDataSet | CSV |
-| MTA_SubwayHR22_24.csv | main repo | CSV |
+| MTA_SubwayHR_June22.csv | main repo | CSV |
 # 2. Machine Specs
 
 # 3. Prerequisites
