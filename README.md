@@ -160,9 +160,13 @@ Be sure to do each individually to install Pika in the environment. You have to 
 In this assignment base code that was developed by Dr. Case in her repository, "[streaming-04-multiple-consumers](https://github.com/denisecase/streaming-04-multiple-consumers)" was utilized in combination with previous work completed in "streaming-04-bonus-ACoffin". Examples of base codes can be found in the BaseCode folder. 
 
 ## 8a. Producer(s):
+Two Producer were created in this project. The first is a Producer that simulates a constant stream of a large amount of data that we will filter and the second was created in associationw with generating Alerts in the Consumers. These two Producers were not combined into a single project as they have different objectives.
+
 ### 8a1. MTA_Num7_Producer
 This producer was created to send data to queue "07-Line" using the join method. The sleep time was set to every 60 seconds. Since the original data is generated hourly, using 60 seconds as a sleep time will simulate the passage of time with each seconds representing a minute that passes. 
 
+### 8a2. MTAProducer2
+NAME WILL CHANGE, STILL PLANNING.
 
 ## 8b. Consumer(s)
 
