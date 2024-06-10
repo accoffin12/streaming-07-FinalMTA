@@ -14,22 +14,45 @@ A Consumer developed to recieve and filter data. This Consumer will only pull me
 import pika
 import sys
 import time
+from datetime import datetime
+import csv
 from utils.util_logger import setup_logger
 
 # Configuring the Logger:
 logger, logname = setup_logger(__file__)
 
+# Variables
+csv_file_path = 'Data_MTA_Num7.csv'
 
 # Define Program functions
 #--------------------------------------------------------------------------
+
 
 # define a callback function to be called when a message is received
 def callback(ch, method, properties, body):
     """ Define behavior on getting a message."""
     # decode the binary message body to a string
     print(f" [x] Received {body.decode()}")
-    # simulate work by sleeping for the number of dots in the message
-    time.sleep(body.count(b"."))
+    logger.info(f" [x] Received {body.decode()}")
+    original = body.decode()
+    message = original.split(',')
+
+    
+    # Convert timestamp back to a string:
+    #transit_timestamp_str = datetime.fromtimestamp(transit_timestamp).strftime("%m/%d/%y %H:%M:%S")
+    
+    # filter the data
+    #filter_stations = Line7_filter(body.decode())
+    
+    # Create a list of tuples containing the data
+    #data = [(transit_timestamp_str, transit_mode, station_complex_id, station_complex, borough, ridership)]
+
+    # Write the filtered data into a new file
+    with open ('Data_MTA_Num7.csv', 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(message)
+    logger.info(f'[x] Added to CSV {message}')
+
     # when done with task, tell the user
     print(" [x] Done.")
     logger.info(" [x] Done.")
@@ -39,7 +62,7 @@ def callback(ch, method, properties, body):
 
 
 # define a main function to run the program
-def main(hn: str = "localhost", qn: str = "task_queue"):
+def main(hn: str = "localhost", qn: str = "07-Line"):
     """ Continuously listen for task messages on a named queue."""
 
     # when a statement can go wrong, use a try-except block
@@ -66,6 +89,7 @@ def main(hn: str = "localhost", qn: str = "task_queue"):
         # a durable queue will survive a RabbitMQ server restart
         # and help ensure messages are processed in order
         # messages will not be deleted until the consumer acknowledges
+        channel.queue_delete(queue=qn)
         channel.queue_declare(queue=qn, durable=True)
 
         # The QoS level controls the # of messages
@@ -81,7 +105,7 @@ def main(hn: str = "localhost", qn: str = "task_queue"):
         # configure the channel to listen on a specific queue,  
         # use the callback function named callback,
         # and do not auto-acknowledge the message (let the callback handle it)
-        channel.basic_consume( queue=qn, on_message_callback=callback)
+        channel.basic_consume( queue=qn, on_message_callback=callback, auto_ack=False)
 
         # print a message to the console for the user
         print(" [*] Ready for work. To exit press CTRL+C")
@@ -114,4 +138,4 @@ def main(hn: str = "localhost", qn: str = "task_queue"):
 # If this is the program being run, then execute the code below
 if __name__ == "__main__":
     # call the main function with the information needed
-    main("localhost", "task_queue2")
+    main("localhost", '07-Line')

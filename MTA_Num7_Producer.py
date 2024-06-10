@@ -14,6 +14,7 @@ import webbrowser
 import csv
 from datetime import datetime
 import time
+import struct
 import traceback
 
 from utils.util_logger import setup_logger
@@ -58,7 +59,7 @@ def send_message(host: str, queue_name: str, message: str):
         ch = conn.channel()
 
         # Delete existing queus and declares them anew to clear the previous queue.
-        ch.queue_delete(Num7Sub_queue)
+        #ch.queue_delete(Num7Sub_queue)
         
         # use the channel to declare a durable queue
         # a durable queue will survive a RabbitMQ server restart
@@ -95,11 +96,22 @@ try:
             # reading rows from csv
             for row in reader:
                 # Seperate row into variables by column:
-                transit_timestamp, transit_mode, station_complex_id, station_complex, borough, payment_method, fare_class_category, ridership, transfers, latitude, longitude, Georeference = row
+                #transit_timestamp, transit_mode, station_complex_id, station_complex, borough, payment_method, fare_class_category, ridership, transfers, latitude, longitude, Georeference = row
+                transit_timestamp=row[0]
+                station_complex_id = row[2]
+                station_complex = row[3]
+                borough = row[4]
+                ridership = row[7]
+                
+                # logging the row being ingested
+                logger.info(f'{transit_timestamp=} - Row ingested: {station_complex_id=}, {station_complex=}, {borough=}, {ridership=}')
+
+                # Convert the transit_timestamp_str into a datetime object in Unix:
+                #transit_timestamp = datetime.strptime(transit_timestamp_str, "%m/%d/%y %H:%M:%S"). timestamp()
                 # Pulling the entire row
-                station_rider = ','.join(row)
-                send_message(host, "07-Line", station_rider)
-                logger.info(f"[x] sent {station_rider} at {transit_timestamp} to {Num7Sub_queue}")
+                message =(f" Arrived: {transit_timestamp}, {station_complex_id}, {station_complex}, {borough}, {ridership}").encode() 
+                send_message(host, "07-Line", message)
+                logger.info(f"[x] sent {message} at {transit_timestamp} to {Num7Sub_queue}")
             
             
             # set sleep for 60 seconds before reading next row to simulate an hour.

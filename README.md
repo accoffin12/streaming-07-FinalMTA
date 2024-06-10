@@ -40,6 +40,7 @@ Traditionally Log files are not uploaded to GitHub, however, as this is a stream
 | v2_listenining_worker.py | BaseCode_Samples folder | python script |
 | requriements.txt | main repo | text doc |
 | MTA_SubwayHR_June22.csv | main repo | CSV |
+| MTA_SubwayW1Feb22.csv | main repo | CSV |
 | aboutenv.txt | utils\util_outputs | text |
 | util_about.txt | utils\util_outputs | text |
 # 2. Machine Specs
@@ -106,9 +107,9 @@ In 2019 the Busiest subway stations Accordign to the MTA were as Follows:
 
 
 # 6. Modifications of Data
-A secondary file containing the data utilized in this repo is located in the main repo. This variation of the altered file was modified by selecting data from June 2022. June 2022 data was selected as it contained an example of each station multiple times over the period. Due to the size of the dataset it is not possible to upload the entire CSV to github. 
+A secondary file containing the data utilized in this repo is located in the main repo. This variation of the altered file was modified by selecting data from week 1 of February 2022. The first week of February 2022 data was selected as it contained an example of each station multiple times over the period. Due to the size of the dataset it is not possible to upload the entire CSV to github. 
 
-(Will Update Late)
+NOTE TO SELF: KEEP SECONDARY JUNE DATA IN CASE ISSUES WITH FEB. 
 
 # 7. Creating an Environment & Installs
 Before beginning this project two environments were made, one as a VS Code environment and the other as an Anaconda environment. RabbitMQ requires the Pika Library to function, to ensure that the scripts execute and create an environment in either VS Code or Anaconda.
@@ -163,7 +164,25 @@ In this assignment base code that was developed by Dr. Case in her repository, "
 Two Producer were created in this project. The first is a Producer that simulates a constant stream of a large amount of data that we will filter and the second was created in associationw with generating Alerts in the Consumers. These two Producers were not combined into a single project as they have different objectives.
 
 ### 8a1. MTA_Num7_Producer
-This producer was created to send data to queue "07-Line" using the join method. The sleep time was set to every 60 seconds. Since the original data is generated hourly, using 60 seconds as a sleep time will simulate the passage of time with each seconds representing a minute that passes. 
+This producer was created to send data to queue "07-Line" using the join method. The sleep time was set to every 60 seconds. Since the original data is generated hourly, using 60 seconds as a sleep time will simulate the passage of time with each seconds representing a minute that passes. Since we are looking for all the stations along the Number 7, the following is a list of station_complex_id and station_complex that meets our criteria. 
+
+| station_complex_id | station_complex |
+| 447 | Flushing-Main St (7) |
+| 448 | Mets-Willets Point (7) |
+| 449 | 111 St (7) |
+| 450 | 103 St-Corona Plaza (7) |
+| 451 | Junction Blvd (7) |
+| 452 | 90 St-Elmhurst Av (7) |
+| 453 | 82 St-Jackson Hts (7) |
+| 455 | 69 St (7) |
+| 456 | 61 St-Woodside (7) |
+| 457 | 52 St (7) |
+| 458 | 46 St-Bliss St (7) |
+| 459 | 40 St-Lowery St (7) |
+| 460 | 33 St-Rawson St (7) |
+| 461 | Queensboro Plaza (7, N, W) |
+| 463 | Hunters Point Av (7) |
+| 464 | Vernon Blvd-Jackson Av (7) |
 
 ### 8a2. MTAProducer2
 NAME WILL CHANGE, STILL PLANNING.
