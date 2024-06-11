@@ -1,7 +1,18 @@
 """
-   UNDER DEVELOPEMENT:
+   Created by: A. C. Coffin
+    Date: 10 June 2024
 
-   Emitter for MTA Data collecting on Number 7 Line Station Data.
+   This script was developed to pull only selected columns for the larger data stream. In this case we are interested in:
+   1. transit_timestamp
+   2. station_complex_id
+   3. station_complex
+   4. borough
+   5. ridership
+
+   By doing this, we are able to gather data to help us determine how many people are riding the subway at specific times, 
+   from specific stations with their attached boroughs. 
+   The first part of the script sets up the connection with the RabbitMQ server.
+   The second function reads the CSV, selects the desired data, creates the message and then send the message to queue.
 
     Base Code Author: Denise Case
     Date: January 15, 2023
@@ -14,7 +25,6 @@ import webbrowser
 import csv
 from datetime import datetime
 import time
-import struct
 import traceback
 
 from utils.util_logger import setup_logger
@@ -77,10 +87,11 @@ def send_message(host: str, queue_name: str, message: str):
     finally:
         # close the connection to the server
         conn.close()
+     
 
 def main(host: str, input_file:str):
     """
-    Open a CSV and iterate through each row of the CSV.
+    Open a CSV and iterate through each row of the CSV to trun it to a list of dictionars (JSON format)
     Seperate processes by column and send message by calling the send message function.
 
     Parameters:
@@ -91,10 +102,10 @@ def main(host: str, input_file:str):
     """
 try:
     with open(input_file_name, 'r', newline='', encoding='utf-8') as input_file:
-            reader = csv.reader(input_file, delimiter=',')
-            next(reader)
-            # reading rows from csv
-            for row in reader:
+        reader = csv.reader(input_file, delimiter=',')
+        next(reader)
+        # reading rows from csv
+        for row in reader:
                 # Seperate row into variables by column:
                 #transit_timestamp, transit_mode, station_complex_id, station_complex, borough, payment_method, fare_class_category, ridership, transfers, latitude, longitude, Georeference = row
                 transit_timestamp=row[0]
@@ -102,21 +113,20 @@ try:
                 station_complex = row[3]
                 borough = row[4]
                 ridership = row[7]
-                
+
                 # logging the row being ingested
                 logger.info(f'{transit_timestamp=} - Row ingested: {station_complex_id=}, {station_complex=}, {borough=}, {ridership=}')
-
                 # Convert the transit_timestamp_str into a datetime object in Unix:
                 #transit_timestamp = datetime.strptime(transit_timestamp_str, "%m/%d/%y %H:%M:%S"). timestamp()
-                # Pulling the entire row
-                message =(f" Arrived: {transit_timestamp}, {station_complex_id}, {station_complex}, {borough}, {ridership}").encode() 
+                # Pulling the desired info
+                message =(f" {transit_timestamp}, {station_complex_id}, {station_complex}, {borough}, {ridership}").encode() 
                 send_message(host, "07-Line", message)
                 logger.info(f"[x] sent {message} at {transit_timestamp} to {Num7Sub_queue}")
             
             
-            # set sleep for 60 seconds before reading next row to simulate an hour.
-            #time.sleep(30)# Time was set to 30 seconds for Producer Test 1.
-            time.sleep(60)
+        # set sleep for 60 seconds before reading next row to simulate an hour.
+        #time.sleep(30)# Time was set to 30 seconds for Producer Test 1.
+        time.sleep(60)
 
 # A Keyboard Interrupt was added as the Process to pull all of the data from the stream is long. 
 # Escape also adds note to the log.            

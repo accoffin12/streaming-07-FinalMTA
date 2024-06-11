@@ -7,7 +7,7 @@ Weekly approximatly 5.5 million people use the Subway in New York City, annually
 
 This project was designed to collect data from a modified CSV file that will be streamed through RabbitMQ, a message broker to simulate the process of filtering and collecting data from a data stream. There are several goals that we will be fullfilling:
 
-* Filtering out the data based on stations on the Number 7 Train Line.
+* Pulling only data we are interested in: transit_timestamp, station_complex_id, station_complex, borough, ridership.
 * Creating an alert for when a station is busy based on the number of passengers at it for Grand Central.
 * Creating another alert for if a station is busy for Hunters Point. 
 
@@ -164,31 +164,65 @@ In this assignment base code that was developed by Dr. Case in her repository, "
 Two Producer were created in this project. The first is a Producer that simulates a constant stream of a large amount of data that we will filter and the second was created in associationw with generating Alerts in the Consumers. These two Producers were not combined into a single project as they have different objectives.
 
 ### 8a1. MTA_Num7_Producer
-This producer was created to send data to queue "07-Line" using the join method. The sleep time was set to every 60 seconds. Since the original data is generated hourly, using 60 seconds as a sleep time will simulate the passage of time with each seconds representing a minute that passes. Since we are looking for all the stations along the Number 7, the following is a list of station_complex_id and station_complex that meets our criteria. 
+The Producer was intended to capture only data applicable to stations along the Number 7 line, however RabbitMQ doesn't have a method to filter these methods effectivly when the information pertaining to each station is burried within the message. Additionally due to the original formatting of the CSV, which combines the station_complex name with the Line Number, it makes it more difficult to seek only a single Line marker. The queue name remains "07-Line", however, to prevent confusion.
 
-| station_complex_id | station_complex |
-| 447 | Flushing-Main St (7) |
-| 448 | Mets-Willets Point (7) |
-| 449 | 111 St (7) |
-| 450 | 103 St-Corona Plaza (7) |
-| 451 | Junction Blvd (7) |
-| 452 | 90 St-Elmhurst Av (7) |
-| 453 | 82 St-Jackson Hts (7) |
-| 455 | 69 St (7) |
-| 456 | 61 St-Woodside (7) |
-| 457 | 52 St (7) |
-| 458 | 46 St-Bliss St (7) |
-| 459 | 40 St-Lowery St (7) |
-| 460 | 33 St-Rawson St (7) |
-| 461 | Queensboro Plaza (7, N, W) |
-| 463 | Hunters Point Av (7) |
-| 464 | Vernon Blvd-Jackson Av (7) |
+As a result since the data can be filted in post processing, this script is designed to pull only the columns we are interested in: transit_timestamp, station_complex_id, borough, ridership. 
+
+The sleep time was set to every 60 seconds. Since the original data is generated hourly, using 60 seconds as a sleep time will simulate the passage of time with each seconds representing a minute that passes. 
+
+#### Selecting Columns
+Rather than reading the entire stream of data into the queue, in this case we selected our columns based on their number and assigned variables to them.
+
+```
+for row in reader:
+                # Seperate row into variables by column:
+                #transit_timestamp, transit_mode, station_complex_id, station_complex, borough, payment_method, fare_class_category, ridership, transfers, latitude, longitude, Georeference = row
+                transit_timestamp=row[0]
+                station_complex_id = row[2]
+                station_complex = row[3]
+                borough = row[4]
+                ridership = row[7]
+
+                # logging the row being ingested
+                logger.info(f'{transit_timestamp=} - Row ingested: {station_complex_id=}, {station_complex=}, {borough=}, {ridership=}')
+```
+Once these rows were pulled from the CSV, they were formatted into a string that would allow us to capture only those varibales:
+
+```
+# Pulling the desired info
+                message =(f" {transit_timestamp}, {station_complex_id}, {station_complex}, {borough}, {ridership}").encode() 
+                send_message(host, "07-Line", message)
+                logger.info(f"[x] sent {message} at {transit_timestamp} to {Num7Sub_queue}")
+```
+As this file is very long, a KeyboardInterrupt was added, as well as FileNotFoundError and a Value error, allowing us to gracefully handle issues and escape the Producer should we need to.
 
 ### 8a2. MTAProducer2
 NAME WILL CHANGE, STILL PLANNING.
 
 ## 8b. Consumer(s)
 
+### 8b1. MTA_ConsumerV1.py
+This Consumer is designed to decode the data collected from MTA_ProducerV1.py and then splits the original message into sections using ','. By doing this processes it allows us to prepare the message to be added to a CSV file for later use.
+
+The following function was used to write the data to the CSV file:
+```
+with open ('Data_MTA_Num7.csv', 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(message)
+        logger.info(f'[x] Added to CSV {message}')
+```
+Once the message has been processed from the queue, the consumer is instructed to delete the queue, ensuring that no messages remain inside before the Producer adds a new message to the queue. Additionally to prevent the miss handling of messages auto_ack was set to false, as a way to ensure the messages were handled prior to deletion of queue. 
+
+```
+channel.queue_delete(queue=qn)
+channel.queue_declare(queue=qn, durable=True)
+
+# prefetch_count = Per consumer limit of unaknowledged messages      
+channel.basic_qos(prefetch_count=1) 
+
+# and do not auto-acknowledge the message (let the callback handle it)
+channel.basic_consume( queue=qn, on_message_callback=callback, auto_ack=False)
+```
 # 9. Executing the Code
 
 # 10. Results

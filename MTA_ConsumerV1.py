@@ -1,10 +1,15 @@
 """
-*** UNDER DEVELOPEMENT ***
+Created by: A. C. Coffin
+Date: 10 June 2024
 
-A Consumer developed to recieve and filter data. This Consumer will only pull messages that apply to the Number 7 line.
-
+A Consumer developed to recieve the selected data from the inigial Producer, see notes in README about Original Project Concept.
+This consumer does the following:
+1. decodes the message from the queue
+2. splits the original message with ',' to facilitate writing the CSV
+3. Writes the data to a CSV file with only the desired columns from the producer.
+    
     This program listens for work messages contiously. 
-    Start multiple versions to add more workers.  
+    Start multiple versions to add more workers. 
 
     Base Code Author: Denise Case
     Date: January 15, 2023
@@ -24,20 +29,20 @@ logger, logname = setup_logger(__file__)
 # Variables
 csv_file_path = 'Data_MTA_Num7.csv'
 
+
 # Define Program functions
 #--------------------------------------------------------------------------
 
 
 # define a callback function to be called when a message is received
 def callback(ch, method, properties, body):
-    """ Define behavior on getting a message."""
+    """ Define behavior on getting a message.  This process utilizes JSON in order to filter the contents of the message."""
     # decode the binary message body to a string
     print(f" [x] Received {body.decode()}")
     logger.info(f" [x] Received {body.decode()}")
     original = body.decode()
     message = original.split(',')
 
-    
     # Convert timestamp back to a string:
     #transit_timestamp_str = datetime.fromtimestamp(transit_timestamp).strftime("%m/%d/%y %H:%M:%S")
     
@@ -45,20 +50,19 @@ def callback(ch, method, properties, body):
     #filter_stations = Line7_filter(body.decode())
     
     # Create a list of tuples containing the data
-    #data = [(transit_timestamp_str, transit_mode, station_complex_id, station_complex, borough, ridership)]
-
+    #data = [(transit_timestamp_str, transit_mode, station_complex_id, station_complex, borough, ridership)
     # Write the filtered data into a new file
     with open ('Data_MTA_Num7.csv', 'a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(message)
-    logger.info(f'[x] Added to CSV {message}')
+        logger.info(f'[x] Added to CSV {message}')
 
-    # when done with task, tell the user
-    print(" [x] Done.")
-    logger.info(" [x] Done.")
-    # acknowledge the message was received and processed 
-    # (now it can be deleted from the queue)
-    ch.basic_ack(delivery_tag=method.delivery_tag)
+        # when done with task, tell the user
+        print(" [x] Done.")
+        logger.info(" [x] Done.")
+        # acknowledge the message was received and processed 
+        # (now it can be deleted from the queue)
+        ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 # define a main function to run the program
