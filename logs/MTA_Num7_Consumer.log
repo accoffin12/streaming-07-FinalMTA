@@ -8127,3 +8127,7 @@
 2024-06-10 22:50:25,062.MTA_Num7_Consumer.INFO  [x] Received  02/1/22 23:00:00, 460, 33 St-Rawson St (7), Queens, 7
 2024-06-10 22:50:25,064.MTA_Num7_Consumer.INFO [x] Added to CSV [' 02/1/22 23:00:00', ' 460', ' 33 St-Rawson St (7)', ' Queens', ' 7']
 2024-06-10 22:50:25,064.MTA_Num7_Consumer.INFO  [x] Done.
+2024-06-10 23:32:46,109.MTA_Num7_Consumer.ERROR Error: Something whent wrong. Error: Stream connection lost: ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)
+2024-06-10 23:32:46,110.MTA_Num7_Consumer.INFO 
+closing connection. Goodby
+

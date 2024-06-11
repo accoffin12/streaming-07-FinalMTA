@@ -43,6 +43,8 @@ Traditionally Log files are not uploaded to GitHub, however, as this is a stream
 | MTA_SubwayW1Feb22.csv | main repo | CSV |
 | aboutenv.txt | utils\util_outputs | text |
 | util_about.txt | utils\util_outputs | text |
+| MTA_ConsumerV1.py | main repo | python script |
+| MTA_ConsumerV2.py | main repo | python script |
 # 2. Machine Specs
 
 # 3. Prerequisites

@@ -25,7 +25,7 @@ import webbrowser
 import csv
 from datetime import datetime
 import time
-import traceback
+
 
 from utils.util_logger import setup_logger
 
