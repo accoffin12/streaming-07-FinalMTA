@@ -1,10 +1,13 @@
 """
 Created by: A. C. Coffin
-Date: 10 June 2024
+Date: 12 June 2024
 
-A Consumer developed to recieve the selected data from the inigial Producer, see notes in README about Original Project Concept.
+A Consumer developed to recieve the selected data from the "MTA_ProducerV2.py", see notes in README about Original Project Concept.
+Please note that this is one of THREE Consumers to run simultaneously, each producing thier own output CSV. 
+Each of these Consumers does the process seperatly to focus on ensuring that the formatting is correct, and allowing for easier tracking of data based on Line.
+
 This consumer does the following:
-1. decodes the message from the queue
+1. decodes the message from the queue associated with LineQ
 2. splits the original message with ',' to facilitate writing the CSV
 3. Writes the data to a CSV file with only the desired columns from the producer.
     
@@ -29,7 +32,7 @@ logger, logname = setup_logger(__file__)
 
 # Variables
 csv_file_path = 'Data_MTA_LineQ.csv'
-column_headers = ['transit_timestamp', 'transit_mode', 'station_complex_id', 'station_complex', 'Line', 'borough', 'payment_method', 'fare_class_category', 'ridership', 'transfers', 'latitude', 'longitude', 'Georeference']
+column_headers = ["transit_timestamp", "transit_mode", "station_complex_id", "station_complex", "Line", "borough", "payment_method", "fare_class_category", "ridership", "transfers", "latitude", "longitude", "Georeference"]
 
 # Define Program functions
 #--------------------------------------------------------------------------
@@ -37,19 +40,45 @@ column_headers = ['transit_timestamp', 'transit_mode', 'station_complex_id', 'st
 
 # define a callback function to be called when a message is received
 def callback(ch, method, properties, body):
-    """ Define behavior on getting a message.  This process utilizes JSON in order to filter the contents of the message."""
+    """ 
+    Define behavior on getting a message.  This process utilizes pickle in order to decode the contents of the message.
+    Message is then added to a CSV specifically for Line Q.
+    """
     # decode the binary message body to a string
     subway_data = pickle.loads(body)
-    logger.info(f'{subway_data['transit_timestamp']} - Row ingested:\n'
-                        f'{subway_data["station_complex_id"]}, {subway_data["station_complex"]}, {subway_data["Line"]}, {subway_data["ridership"]}')
+    logger.info(f'{subway_data["transit_timestamp"]},'
+                    f'{subway_data["transit_mode"]},'
+                    f'{subway_data["station_complex_id"]},'
+                    f'{subway_data["station_complex"]},'
+                    f'{subway_data["Line"]},'
+                    f'{subway_data["borough"]},'
+                    f'{subway_data["fare_class_category"]},'
+                    f'{subway_data["ridership"]},'
+                    f'{subway_data["transfers"]},'
+                    f'{subway_data["latitude"]},'
+                    f'{subway_data["longitude"]},'
+                    f'{subway_data["Georeference"]}')
 
 
     # Write the filtered data into a new file
     with open ('Data_MTA_LineQ.csv', 'a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(column_headers)
+        writer = csv.DictWriter(file, fieldnames=column_headers)
+        if file.tell() == 0:
+            writer.writeheader()
+        # Process each message
         writer.writerow(subway_data)
-        logger.info(f'[x] Added to CSV {subway_data}')
+        logger.info(f'Row ingested: {subway_data["transit_timestamp"]},'
+                    f'{subway_data["transit_mode"]},'
+                    f'{subway_data["station_complex_id"]},'
+                    f'{subway_data["station_complex"]},'
+                    f'{subway_data["Line"]},'
+                    f'{subway_data["borough"]},'
+                    f'{subway_data["fare_class_category"]},'
+                    f'{subway_data["ridership"]},'
+                    f'{subway_data["transfers"]},'
+                    f'{subway_data["latitude"]},'
+                    f'{subway_data["longitude"]},'
+                    f'{subway_data["Georeference"]}')
 
         # when done with task, tell the user
         print(" [x] Done.")
@@ -136,4 +165,4 @@ def main(hn: str = "localhost", qn: str = "Line-Q_queue"):
 # If this is the program being run, then execute the code below
 if __name__ == "__main__":
     # call the main function with the information needed
-    main("localhost", 'LineQ_queue')
+    main("localhost", 'Line-Q_queue')
