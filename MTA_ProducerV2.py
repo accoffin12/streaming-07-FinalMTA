@@ -1,5 +1,16 @@
 """
-    **** UNDER DEVELOPMENT ***
+    Created by: A. C. Coffin
+    Date: 12 June 2024
+
+    This consumer was designed to sort the data into queues based on the Line associated with a specific Subway station.
+    Stations that had multiple connections to different lines were added based on if the line they were part of what alread part of the majority of the others. 
+    For example if a station served Lines 7, N and W, it was added to Line-7_queue. 
+    By doing this it limited the number of queues that were created to 3 queues, as opposed to creating a queue per station.
+
+    1. Creates Connection to RabbitMQ server with details on how to create a queue and send a message.
+    2. reads the csv
+    3. Creates queues based on Subway Line and then sorts the messages based on Line.
+    4. Pickles "subway_data" and send the message to each of the queues created. 
 
     ----
     
@@ -27,7 +38,6 @@ logger, logname = setup_logger(__file__)
 
 # Declare Variables:
 host = 'localhost'
-#input_file_name = 'MTA_SubwayHR_June22.csv'
 input_file_name = 'MTA_SubwayW1Feb22.csv'
 
 
@@ -60,19 +70,12 @@ def send_message(host: str, queue_name: str, message: str):
         conn = pika.BlockingConnection(pika.ConnectionParameters(host))
         # use the connection to create a communication channel
         channel = conn.channel()
-        
-        #Declare the exchange
-        #channel.exchange_declare(exchange='SubwayExchange', exchange_type='direct')
 
-        # List of Station IDS
-        #unique_station_ids = [45, 46, 47, 50, 354, 445, 446, 447, 448, 449, 450, 451, 452, 453, 455, 456, 457, 458, 459, 460, 461, 463, 464]
-        #channel.queue_declare(queue='LineQ_queue', durable = True)
-        #channel.queue_declare(queue= "Line5_queue", durable = True)
+        # use the channel to declare a durable queue
+        # a durable queue will survive a RabbitMQ server restart
+        # and help ensure messages are processed in order
+        # messages will not be deleted until the consumer acknowledges
         channel.queue_declare(queue= queue_name, durable= True)
-
-        # Bind queues tot he exchange with routing keys
-        #channel.queue_bind(exchange='SubwayExchange', routing_key='LineQ')
-        #channel.queue_bind(exchange=)
 
         channel.basic_publish(exchange="", routing_key=queue_name, body=message)
         # print a message to the console for the user

@@ -34,7 +34,6 @@ logger, logname = setup_logger(__file__)
 
 # Declare Variables:
 host = 'localhost'
-#input_file_name = 'MTA_SubwayHR_June22.csv'
 input_file_name = 'MTA_SubwayW1Feb22.csv'
 Num7Sub_queue = '07-Line'
 
