@@ -9,8 +9,8 @@ This project was designed to collect data from a modified CSV file that will be 
 
 * Pulling only data we are interested in: transit_timestamp, station_complex_id, station_complex, borough, ridership.
 * Filtering the data to sort data into CSV's based on the Line a subway station is on.
-* Creating an alert for when a station is busy based on the number of passengers at it for Grand Central.
-* Creating another alert for if a station is busy for Hunters Point. 
+* Creating an alert for when a station is busy based on the number of passengers at it for Flushing-Main St.
+* Creating another alert for if a station is busy for Hunters Point Ave. 
 
 Two of these will require the use of windowing to create alerts, and the first will be an example of collecting data and exporting it to CSV. 
 Traditionally Log files are not uploaded to GitHub, however, as this is a streaming project these logs have been left as a way to demonstrate the success of the project.
@@ -36,7 +36,13 @@ Traditionally Log files are not uploaded to GitHub, however, as this is a stream
 6. [Modifications of Data](Modifications_of_Data)
 7. [Creating an Environment & Installs](Creating_an_Enviroment_&_Installs)
 8. [Method](Method)
+    * [8a1. MTA_producerV1.py](8a1._MTA_ProducerV1.py)
+    * [8a2. MTA_ProducerV2](8a2._MTA_ProducerV2)
+    * [8b1. MTA_ConsumerV1.py](8b1._MTA_ConsumerV1.py)
+    * [8b2. MTA_ConsumeV2 Group](8b2._MTA_ConsumeV2_Group)
 9. [Executing the Code](Executing_the_Code)
+    * [9a. ProducerV1/ConsumerV1](9a._ProducerV1/ConsumerV1)
+    * [9b. ProducerV2/ConsumerV2](9b._ProducerV2/ConsumerV2)
 10. [Results](Results)
 11. [References](References)
 
@@ -52,6 +58,7 @@ Traditionally Log files are not uploaded to GitHub, however, as this is a stream
 | v2_listenining_worker.py | BaseCode_Samples folder | python script |
 | requriements.txt | main repo | text doc |
 | MTA_SubwayW1Feb22.csv | main repo | CSV |
+| Data_MTAAlerts.csv | main repo | CSV |
 | aboutenv.txt | utils\util_outputs | text |
 | util_about.txt | utils\util_outputs | text |
 | MTA_ConsumerV1.py | main repo | python script |
@@ -147,7 +154,9 @@ In 2019 the Busiest subway stations Accordign to the MTA were as Follows:
 # 6. Modifications of Data
 A secondary file containing the data utilized in this repo is located in the main repo. This variation of the altered file was modified by selecting data from week 1 of February 2022. The first week of February 2022 data was selected as it contained an example of each station multiple times over the period. Due to the size of the dataset it is not possible to upload the entire CSV to github. 
 
-NOTE TO SELF: KEEP SECONDARY JUNE DATA IN CASE ISSUES WITH FEB. 
+A column was added containing information pertaining the the Line that each station is part of. Stations that had multiple connections to different lines were added based on if the line they were part of what alread part of the majority of the others. For example if a station served Lines 7, N and W, it was added to Line-7_queue. By doing this it limited the number of queues that were created to 3 queues, as opposed to creating a queue per station.
+
+A Second File was created from the data collected in Data_MTA_Line7.csv containing only information on Station-447(Flushing-Main St (7)) and Station-463(Hunters Point Av (7)) to generate alerts as to how busy a particular station was. This was done in response to project time constraints.
 
 # 7. Creating an Environment & Installs
 Before beginning this project two environments were made, one as a VS Code environment and the other as an Anaconda environment. RabbitMQ requires the Pika Library to function, to ensure that the scripts execute and create an environment in either VS Code or Anaconda.
@@ -196,15 +205,21 @@ install pika # library installation
 Be sure to do each individually to install Pika in the environment. You have to use the forge to do this with Anaconda. Each Terminal should look similar to the following:
 
 # 8. Method
-In this assignment base code that was developed by Dr. Case in her repository, "[streaming-04-multiple-consumers](https://github.com/denisecase/streaming-04-multiple-consumers)" was utilized in combination with previous work completed in "streaming-04-bonus-ACoffin". Examples of base codes can be found in the BaseCode folder. 
+In this assignment base code that was developed by Dr. Case in her repository, "[streaming-04-multiple-consumers](https://github.com/denisecase/streaming-04-multiple-consumers)" was utilized in combination with previous work completed in "streaming-04-bonus-ACoffin". Examples of base codes can be found in the BaseCode folder. For quick navigation see the following sections:
+
+* [8a1. MTA_producerV1.py](8a1._MTA_ProducerV1.py)
+* [8a2. MTA_ProducerV2](8a2._MTA_ProducerV2)
+* [8b1. MTA_ConsumerV1.py](8b1._MTA_ConsumerV1.py)
+* [8b2. MTA_ConsumeV2 Group](8b2._MTA_ConsumeV2_Group)
 
 ## 8a. Producer(s):
+Each section explains a different Producer developed for this project. All of the producers have a sleep time set to every 60 seconds. Since the original data is generated hourly, using 60 seconds as a sleep time will simulate the passage of time with each seconds representing a minute that passes. 
 
+* [8a1. MTA_producerV1.py](8a1._MTA_ProducerV1.py)
+* [8a2. MTA_ProducerV2](8a2._MTA_ProducerV2)
 
 ### 8a1. MTA_ProducerV1.py
 This script was designed to collect only sepcific aspect of information from the stream, as opposed to the entire line. In this instance the objective was to collect data pertaining to: transit_timestamp, station_complex_id, station_complex, borough, and ridership. This intial producer demonstrates the ability of the user to select specific columns, without having to collect all of the data. The queue name used was Num7Sub_queue, this was due to it's existance and use with a previous project. The Consumer was specifically designed to delete the queue and then reaccess it, ensuring that there wasn't data contamination.
-
-The sleep time was set to every 60 seconds. Since the original data is generated hourly, using 60 seconds as a sleep time will simulate the passage of time with each seconds representing a minute that passes. 
 
 #### Selecting Columns
 Rather than reading the entire stream of data into the queue, in this case we selected our columns based on their number and assigned variables to them.
@@ -233,7 +248,7 @@ Once these rows were pulled from the CSV, they were formatted into a string that
 As this file is very long, a KeyboardInterrupt was added, as well as FileNotFoundError and a Value error, allowing us to gracefully handle issues and escape the Producer should we need to.
 
 ### 8a2. MTA_ProducerV2
-The second producer was more complex in design, as it was created to sort the data from the stream into bins based on which subway line the station was part of. Stations that had multiple connections to different lines were added based on if the line they were part of what alread part of the majority of the others. For example if a station served Lines 7, N and W, it was added to Line-7_queue. By doing this it limited the number of queues that were created to 3 queues, as opposed to creating a queue per station.
+The second producer was more complex in design, as it was created to sort the data from the stream into bins based on which subway line the station was part of. 
 
 The function `send_message` in this code is identical to the one developed by Dr. Case in the Base Code provided. See the BaseCode_Samples folder for more information.
 
@@ -282,8 +297,19 @@ Next we sort subway_data into queues based on the subway Line and pack the messa
 ```
 Similar to the other Producer, a KeyInterrrupt was added. This addition was to ensure that if the user terminated the process early it was handled properly and didn't result in unusual terminal readings or an improper disconnect. 
 
+## 8a3. MTA_ProducerV3
+The average number of passengers for each station:
+ Station 463 = 85.916 or 86 passengers
+ Station 447 = 988.024 or 989 passengers
+These numbers were found doing a basic Excel Average, and for our purposes we will be using these numbers to determine what we consider as busy for a sation. In order to create our alerts and with the Average in mind we will be using the following:
+Station 463 is busy if passengers > 100
+Station 447 is busy if passengers > 1000
+
 ## 8b. Consumer(s)
-This project contains multiple consumers, each of them was designed to output a CSV but decodes the message using different processes. For example "MTA_ConsumerV1.py" uses `decode()` where as the V2 series of Consumers uses pickling. T
+This project contains multiple consumers, each of them was designed to output a CSV but decodes the message using different processes. For example "MTA_ConsumerV1.py" uses `decode()` where as the V2 series of Consumers uses pickling. 
+
+* [8b1. MTA_ConsumerV1.py](8b1._MTA_ConsumerV1.py)
+* [8b2. MTA_ConsumeV2 Group](8b2._MTA_ConsumeV2_Group)
 
 ### 8b1. MTA_ConsumerV1.py
 This Consumer is designed to decode the data collected from MTA_ProducerV1.py and then splits the original message into sections using ','. By doing this processes it allows us to prepare the message to be added to a CSV file for later use.
