@@ -15,7 +15,7 @@ import pika
 import sys
 import webbrowser
 import csv
-import pandas as pd
+import pickle
 from datetime import datetime
 import time
 
@@ -65,18 +65,19 @@ def send_message(host: str, queue_name: str, message: str):
         #channel.exchange_declare(exchange='SubwayExchange', exchange_type='direct')
 
         # List of Station IDS
-        unique_station_ids = [45, 46, 47, 50, 354, 445, 446, 447, 448, 449, 450, 451, 452, 453, 455, 456, 457, 458, 459, 460, 461, 463, 464]
-        channel.queue_declare(queue='LineQ_queue', durable = True)
-        channel.queue_declare(queue= "Line5_queue", durable = True)
-        channel.queue_declare(queue= "Line7_queue", durable= True)
+        #unique_station_ids = [45, 46, 47, 50, 354, 445, 446, 447, 448, 449, 450, 451, 452, 453, 455, 456, 457, 458, 459, 460, 461, 463, 464]
+        #channel.queue_declare(queue='LineQ_queue', durable = True)
+        #channel.queue_declare(queue= "Line5_queue", durable = True)
+        channel.queue_declare(queue= queue_name, durable= True)
 
         # Bind queues tot he exchange with routing keys
         #channel.queue_bind(exchange='SubwayExchange', routing_key='LineQ')
         #channel.queue_bind(exchange=)
 
-       
         channel.basic_publish(exchange="", routing_key=queue_name, body=message)
         # print a message to the console for the user
+        logger.info(f"[x] Sent {message}")
+        
     except pika.exceptions.AMQPConnectionError as e:
         print(f"Error: Connection to RabbitMQ server failed: {e}")
         logger.error(f"Error: Connection to RabbitMQ server failed: {e}")
@@ -98,70 +99,37 @@ def main(host: str, input_file:str):
     Comments above the code are reffering to the code in the next line and its function.
     """
 try:
-    # Initializing directories to store data by subway line:
-    subway_data_by_line = {}
-
-    # Intializing empty lists to store extracted data
-    transit_timestamps = []
-    station_complex_ids = []
-    station_complexes = []
-    boroughs = []
-    riderships = []
-
-    with open(input_file_name, 'r', newline='', encoding='utf-8') as input_file:
-        reader = csv.reader(input_file, delimiter=',')
+     with open(input_file_name, 'r', newline='') as input_file:
+        reader = csv.reader(input_file)
         next(reader)
         # reading rows from csv
         for row in reader:
-                # Seperate row into variables by column:
-                #transit_timestamp, transit_mode, station_complex_id, station_complex, borough, payment_method, fare_class_category, ridership, transfers, latitude, longitude, Georeference = row
-                #transit_timestamp=row[0]
-                #station_complex_id = row[2]
-                #station_complex = row[3]
-                line = [4]
-                #borough = row[4]
-                #ridership = row[7]
-                transit_timestamps.append(row[0])
-                station_complex_ids.append(row[2])
-                station_complexes.append(row[3])
-                boroughs.append(row[5])
-                riderships.append(row[7])
+            subway_data = {
+                'transit_timestamp': row[0],
+                'transit_mode':row[1],
+                'station_complex_id':int(row[2]),
+                'station_complex':row[3],
+                'Line':row[4],
+                'borough':row[5],
+                'payment_method': row[6],
+                'fare_class_category': row[7],
+                'ridership':row[8],
+                'transfers':int(row[9]),
+                'latitude':row[10],
+                'longitude':row[11],
+                'Georeference':row[12]
 
-                # Append data to the appropriate list based on Subway Line
-                if line not in subway_data_by_line:
-                    subway_data_by_line[line]
-                
-                subway_data_by_line[line].append((transit_timestamp, station_complex_id, station_complex, borough, ridership))
-
-                # Iterate through the tuples and send the message:
-                for i in range(len(transit_timestamp)):
-                     transit_timestamp = transit_timestamps[i]
-                     station_complex_id = station_complex_ids[i]
-                     station_complex = station_complexes[i]
-                     borough = boroughs[i]
-                     ridership = riderships[i]
+                }
                 # logging the row being ingested
-                #logger.info(f'{transit_timestamp=} - Row ingested: {station_complex_id=}, {station_complex=}, {borough=}, {ridership=}')
-                # Convert the transit_timestamp_str into a datetime object in Unix:
-                #transit_timestamp = datetime.strptime(transit_timestamp_str, "%m/%d/%y %H:%M:%S"). timestamp()
-                # Pulling the desired info
+            logger.info(f'{subway_data["transit_timestamp"]} - Row ingested: {subway_data["station_complex_id"]}, {subway_data["station_complex"]}, {subway_data["Line"]}, {subway_data["ridership"]}')
+                
+            # select queue depending on line
+            queue = 'Line-' + subway_data['Line'] + '_queue'
 
-                #Sending message to LineQ_queue:
-                message =(f" {transit_timestamp}, {station_complex_id}, {station_complex},{line}, {borough}, {ridership}").encode()
-                send_message("localhost", "LineQ_queue", message)
-                logger.info(f"[x] sent {message} at {transit_timestamp}")
-
-                # Sending message to Line5_queue
-                message = (f" {transit_timestamp}, {station_complex_id}, {station_complex},{line}, {borough}, {ridership}").encode() 
-                send_message("localhost", "Line5_queue", message)
-                logger.info(f"[x] sent {message} at {transit_timestamp}")
-
-                # Sending message to Line7_queue:
-                message = (f" {transit_timestamp}, {station_complex_id}, {station_complex},{line}, {borough}, {ridership}").encode() 
-                send_message("localhost", "Line7_queue", message)
-                logger.info(f"[x] sent {message} at {transit_timestamp}")
-            
-            
+            # pack message contents with pickle
+            message = pickle.dumps(subway_data)
+            send_message('localhost', queue, message)
+            logger.info(f"[x] send_message('localhost', {queue}, {subway_data['transit_timestamp']}, {subway_data['station_complex_id']}, {subway_data['Line']}, {subway_data['ridership']})")
         # set sleep for 60 seconds before reading next row to simulate an hour.
         #time.sleep(30)# Time was set to 30 seconds for Producer Test 1.
         time.sleep(60)
@@ -190,4 +158,5 @@ if __name__ == "__main__":
     offer_rabbitmq_admin_site()
 
     # send the message to the queue
+    logger.info(f'Begin process: {__name__}')
     main("localhost", input_file_name)
