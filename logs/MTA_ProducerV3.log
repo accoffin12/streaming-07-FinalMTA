@@ -1,20 +1,64 @@
-2024-06-12 20:29:17,678.MTA_ProducerV3.INFO ==================================================
-2024-06-12 20:29:17,678.MTA_ProducerV3.INFO Today is 2024-06-12 at 08:29 PM
-2024-06-12 20:29:17,678.MTA_ProducerV3.INFO Running on: nt Windows 10
-2024-06-12 20:29:17,678.MTA_ProducerV3.INFO Python version:  3.11.4
-2024-06-12 20:29:17,678.MTA_ProducerV3.INFO Python path: C:\Users\Tower\AppData\Local\Programs\Python\Python311
-2024-06-12 20:29:17,678.MTA_ProducerV3.INFO Working dir: C:\Users\Tower\Documents\ACoffinCSIS44671\streaming-07-FinalMTA
-2024-06-12 20:29:17,678.MTA_ProducerV3.INFO ==================================================
-2024-06-12 20:29:17,768.MTA_ProducerV3.INFO [x] Sent: b'`\xcc\xf8a\x00\x00\x00\x00\x8f\x00\x00\x00' to Station-447
-2024-06-12 20:29:17,768.MTA_ProducerV3.INFO [x] Sent: b'`\xcc\xf8a\x00\x00\x00\x00\x14\x00\x00\x00' to Station-463
-2024-06-12 20:30:17,806.MTA_ProducerV3.INFO [x] Sent: b'p\xda\xf8a\x00\x00\x00\x007\x00\x00\x00' to Station-447
-2024-06-12 20:30:17,819.MTA_ProducerV3.INFO [x] Sent: b'p\xda\xf8a\x00\x00\x00\x00\x06\x00\x00\x00' to Station-463
-2024-06-12 20:31:17,836.MTA_ProducerV3.INFO [x] Sent: b"\x80\xe8\xf8a\x00\x00\x00\x00'\x00\x00\x00" to Station-447
-2024-06-12 20:31:17,855.MTA_ProducerV3.INFO [x] Sent: b'\x80\xe8\xf8a\x00\x00\x00\x00\x0b\x00\x00\x00' to Station-463
-2024-06-12 20:32:17,872.MTA_ProducerV3.INFO [x] Sent: b'\x90\xf6\xf8a\x00\x00\x00\x002\x00\x00\x00' to Station-447
-2024-06-12 20:32:17,904.MTA_ProducerV3.INFO [x] Sent: b'\x90\xf6\xf8a\x00\x00\x00\x00\n\x00\x00\x00' to Station-463
-2024-06-12 20:33:17,921.MTA_ProducerV3.INFO [x] Sent: b'\xa0\x04\xf9a\x00\x00\x00\x00\xdb\x00\x00\x00' to Station-447
-2024-06-12 20:33:17,950.MTA_ProducerV3.INFO [x] Sent: b'\xa0\x04\xf9a\x00\x00\x00\x00\x13\x00\x00\x00' to Station-463
-2024-06-12 20:34:17,961.MTA_ProducerV3.INFO [x] Sent: b'\xb0\x12\xf9a\x00\x00\x00\x00\xa0\x03\x00\x00' to Station-447
-2024-06-12 20:34:17,999.MTA_ProducerV3.INFO [x] Sent: b'\xb0\x12\xf9a\x00\x00\x00\x00J\x00\x00\x00' to Station-463
-2024-06-12 20:34:46,277.MTA_ProducerV3.INFO KeyboardInterrupt. Stopping the Program
+2024-06-12 20:56:25,026.MTA_ProducerV3.INFO ==================================================
+2024-06-12 20:56:25,026.MTA_ProducerV3.INFO Today is 2024-06-12 at 08:56 PM
+2024-06-12 20:56:25,026.MTA_ProducerV3.INFO Running on: nt Windows 10
+2024-06-12 20:56:25,026.MTA_ProducerV3.INFO Python version:  3.11.4
+2024-06-12 20:56:25,026.MTA_ProducerV3.INFO Python path: C:\Users\Tower\AppData\Local\Programs\Python\Python311
+2024-06-12 20:56:25,026.MTA_ProducerV3.INFO Working dir: C:\Users\Tower\Documents\ACoffinCSIS44671\streaming-07-FinalMTA
+2024-06-12 20:56:25,026.MTA_ProducerV3.INFO ==================================================
+2024-06-12 20:56:25,082.MTA_ProducerV3.INFO [x] Sent: b'`\xcc\xf8a\x00\x00\x00\x00\x8f\x00\x00\x00' to Station-447
+2024-06-12 20:56:25,099.MTA_ProducerV3.INFO [x] Sent: b'`\xcc\xf8a\x00\x00\x00\x00\x14\x00\x00\x00' to Station-463
+2024-06-12 20:56:35,120.MTA_ProducerV3.INFO [x] Sent: b'p\xda\xf8a\x00\x00\x00\x007\x00\x00\x00' to Station-447
+2024-06-12 20:56:35,150.MTA_ProducerV3.INFO [x] Sent: b'p\xda\xf8a\x00\x00\x00\x00\x06\x00\x00\x00' to Station-463
+2024-06-12 20:56:45,167.MTA_ProducerV3.INFO [x] Sent: b"\x80\xe8\xf8a\x00\x00\x00\x00'\x00\x00\x00" to Station-447
+2024-06-12 20:56:45,197.MTA_ProducerV3.INFO [x] Sent: b'\x80\xe8\xf8a\x00\x00\x00\x00\x0b\x00\x00\x00' to Station-463
+2024-06-12 20:56:55,214.MTA_ProducerV3.INFO [x] Sent: b'\x90\xf6\xf8a\x00\x00\x00\x002\x00\x00\x00' to Station-447
+2024-06-12 20:56:55,243.MTA_ProducerV3.INFO [x] Sent: b'\x90\xf6\xf8a\x00\x00\x00\x00\n\x00\x00\x00' to Station-463
+2024-06-12 20:57:05,261.MTA_ProducerV3.INFO [x] Sent: b'\xa0\x04\xf9a\x00\x00\x00\x00\xdb\x00\x00\x00' to Station-447
+2024-06-12 20:57:05,289.MTA_ProducerV3.INFO [x] Sent: b'\xa0\x04\xf9a\x00\x00\x00\x00\x13\x00\x00\x00' to Station-463
+2024-06-12 20:57:15,307.MTA_ProducerV3.INFO [x] Sent: b'\xb0\x12\xf9a\x00\x00\x00\x00\xa0\x03\x00\x00' to Station-447
+2024-06-12 20:57:15,335.MTA_ProducerV3.INFO [x] Sent: b'\xb0\x12\xf9a\x00\x00\x00\x00J\x00\x00\x00' to Station-463
+2024-06-12 20:57:25,352.MTA_ProducerV3.INFO [x] Sent: b'\xc0 \xf9a\x00\x00\x00\x00>\x06\x00\x00' to Station-447
+2024-06-12 20:57:25,380.MTA_ProducerV3.INFO [x] Sent: b'\xc0 \xf9a\x00\x00\x00\x00\x85\x00\x00\x00' to Station-463
+2024-06-12 20:57:35,397.MTA_ProducerV3.INFO [x] Sent: b'\xd0.\xf9a\x00\x00\x00\x00p\t\x00\x00' to Station-447
+2024-06-12 20:57:35,422.MTA_ProducerV3.INFO [x] Sent: b'\xd0.\xf9a\x00\x00\x00\x00\xa0\x00\x00\x00' to Station-463
+2024-06-12 20:57:45,438.MTA_ProducerV3.INFO [x] Sent: b'\xe0<\xf9a\x00\x00\x00\x00P\t\x00\x00' to Station-447
+2024-06-12 20:57:45,468.MTA_ProducerV3.INFO [x] Sent: b'\xe0<\xf9a\x00\x00\x00\x00\x0c\x01\x00\x00' to Station-463
+2024-06-12 20:57:55,486.MTA_ProducerV3.INFO [x] Sent: b'\xf0J\xf9a\x00\x00\x00\x00\xa8\x06\x00\x00' to Station-447
+2024-06-12 20:57:55,514.MTA_ProducerV3.INFO [x] Sent: b'\xf0J\xf9a\x00\x00\x00\x00d\x00\x00\x00' to Station-463
+2024-06-12 20:58:05,531.MTA_ProducerV3.INFO [x] Sent: b'\x00Y\xf9a\x00\x00\x00\x00\xeb\x04\x00\x00' to Station-447
+2024-06-12 20:58:05,559.MTA_ProducerV3.INFO [x] Sent: b'\x00Y\xf9a\x00\x00\x00\x007\x00\x00\x00' to Station-463
+2024-06-12 20:58:15,577.MTA_ProducerV3.INFO [x] Sent: b'\x10g\xf9a\x00\x00\x00\x00\xab\x03\x00\x00' to Station-447
+2024-06-12 20:58:15,606.MTA_ProducerV3.INFO [x] Sent: b'\x10g\xf9a\x00\x00\x00\x00"\x00\x00\x00' to Station-463
+2024-06-12 20:58:25,623.MTA_ProducerV3.INFO [x] Sent: b' u\xf9a\x00\x00\x00\x00\r\x04\x00\x00' to Station-447
+2024-06-12 20:58:25,651.MTA_ProducerV3.INFO [x] Sent: b' u\xf9a\x00\x00\x00\x005\x00\x00\x00' to Station-463
+2024-06-12 20:58:35,668.MTA_ProducerV3.INFO [x] Sent: b'0\x83\xf9a\x00\x00\x00\x00 \x04\x00\x00' to Station-447
+2024-06-12 20:58:35,697.MTA_ProducerV3.INFO [x] Sent: b'0\x83\xf9a\x00\x00\x00\x00-\x00\x00\x00' to Station-463
+2024-06-12 20:58:45,714.MTA_ProducerV3.INFO [x] Sent: b'@\x91\xf9a\x00\x00\x00\x00_\x04\x00\x00' to Station-447
+2024-06-12 20:58:45,742.MTA_ProducerV3.INFO [x] Sent: b'@\x91\xf9a\x00\x00\x00\x00k\x00\x00\x00' to Station-463
+2024-06-12 20:58:55,760.MTA_ProducerV3.INFO [x] Sent: b'P\x9f\xf9a\x00\x00\x00\x00\x84\x05\x00\x00' to Station-447
+2024-06-12 20:58:55,790.MTA_ProducerV3.INFO [x] Sent: b'P\x9f\xf9a\x00\x00\x00\x00\x9e\x01\x00\x00' to Station-463
+2024-06-12 20:59:05,808.MTA_ProducerV3.INFO [x] Sent: b'`\xad\xf9a\x00\x00\x00\x00\x9e\x05\x00\x00' to Station-447
+2024-06-12 20:59:05,837.MTA_ProducerV3.INFO [x] Sent: b'`\xad\xf9a\x00\x00\x00\x00\xc8\x01\x00\x00' to Station-463
+2024-06-12 20:59:15,854.MTA_ProducerV3.INFO [x] Sent: b'p\xbb\xf9a\x00\x00\x00\x00\x06\x06\x00\x00' to Station-447
+2024-06-12 20:59:15,884.MTA_ProducerV3.INFO [x] Sent: b'p\xbb\xf9a\x00\x00\x00\x00u\x01\x00\x00' to Station-463
+2024-06-12 20:59:25,902.MTA_ProducerV3.INFO [x] Sent: b'\x80\xc9\xf9a\x00\x00\x00\x00\x94\x04\x00\x00' to Station-447
+2024-06-12 20:59:25,928.MTA_ProducerV3.INFO [x] Sent: b'\x80\xc9\xf9a\x00\x00\x00\x00\xa2\x00\x00\x00' to Station-463
+2024-06-12 20:59:35,945.MTA_ProducerV3.INFO [x] Sent: b'\x90\xd7\xf9a\x00\x00\x00\x00\x08\x03\x00\x00' to Station-447
+2024-06-12 20:59:35,973.MTA_ProducerV3.INFO [x] Sent: b'\x90\xd7\xf9a\x00\x00\x00\x00A\x00\x00\x00' to Station-463
+2024-06-12 20:59:45,991.MTA_ProducerV3.INFO [x] Sent: b'\xa0\xe5\xf9a\x00\x00\x00\x00\xa7\x02\x00\x00' to Station-447
+2024-06-12 20:59:46,020.MTA_ProducerV3.INFO [x] Sent: b'\xa0\xe5\xf9a\x00\x00\x00\x00+\x00\x00\x00' to Station-463
+2024-06-12 20:59:56,038.MTA_ProducerV3.INFO [x] Sent: b'\xb0\xf3\xf9a\x00\x00\x00\x00s\x02\x00\x00' to Station-447
+2024-06-12 20:59:56,067.MTA_ProducerV3.INFO [x] Sent: b'\xb0\xf3\xf9a\x00\x00\x00\x00 \x00\x00\x00' to Station-463
+2024-06-12 21:00:06,084.MTA_ProducerV3.INFO [x] Sent: b'\xc0\x01\xfaa\x00\x00\x00\x00\xed\x01\x00\x00' to Station-447
+2024-06-12 21:00:06,114.MTA_ProducerV3.INFO [x] Sent: b'\xc0\x01\xfaa\x00\x00\x00\x00\x16\x00\x00\x00' to Station-463
+2024-06-12 21:00:16,133.MTA_ProducerV3.INFO [x] Sent: b'\xd0\x0f\xfaa\x00\x00\x00\x00\xdd\x00\x00\x00' to Station-447
+2024-06-12 21:00:16,162.MTA_ProducerV3.INFO [x] Sent: b'\xd0\x0f\xfaa\x00\x00\x00\x00:\x00\x00\x00' to Station-463
+2024-06-12 21:00:26,182.MTA_ProducerV3.INFO [x] Sent: b'\xe0\x1d\xfaa\x00\x00\x00\x00j\x00\x00\x00' to Station-447
+2024-06-12 21:00:26,205.MTA_ProducerV3.INFO [x] Sent: b'\xe0\x1d\xfaa\x00\x00\x00\x00\x11\x00\x00\x00' to Station-463
+2024-06-12 21:00:36,222.MTA_ProducerV3.INFO [x] Sent: b'\xf0+\xfaa\x00\x00\x00\x00*\x00\x00\x00' to Station-447
+2024-06-12 21:00:36,222.MTA_ProducerV3.INFO [x] Sent: b'\xf0+\xfaa\x00\x00\x00\x00\x07\x00\x00\x00' to Station-463
+2024-06-12 21:00:46,250.MTA_ProducerV3.INFO [x] Sent: b'\x00:\xfaa\x00\x00\x00\x00-\x00\x00\x00' to Station-447
+2024-06-12 21:00:46,294.MTA_ProducerV3.INFO [x] Sent: b'\x00:\xfaa\x00\x00\x00\x00\x08\x00\x00\x00' to Station-463
+2024-06-12 21:00:56,314.MTA_ProducerV3.INFO [x] Sent: b'\x10H\xfaa\x00\x00\x00\x002\x00\x00\x00' to Station-447
+2024-06-12 21:00:56,343.MTA_ProducerV3.INFO [x] Sent: b'\x10H\xfaa\x00\x00\x00\x00\x06\x00\x00\x00' to Station-463
+2024-06-12 21:00:59,749.MTA_ProducerV3.INFO KeyboardInterrupt. Stopping the Program

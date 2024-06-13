@@ -1,27 +1,173 @@
-2024-06-12 20:29:06,225.MTA_ConsumeV3.INFO ==================================================
-2024-06-12 20:29:06,225.MTA_ConsumeV3.INFO Today is 2024-06-12 at 08:29 PM
-2024-06-12 20:29:06,240.MTA_ConsumeV3.INFO Running on: nt Windows 10
-2024-06-12 20:29:06,240.MTA_ConsumeV3.INFO Python version:  3.12.3
-2024-06-12 20:29:06,240.MTA_ConsumeV3.INFO Python path: C:\Users\Tower\anaconda3\envs\RabbitEnv
-2024-06-12 20:29:06,240.MTA_ConsumeV3.INFO Working dir: C:\Users\Tower\Documents\ACoffinCSIS44671\streaming-07-FinalMTA
-2024-06-12 20:29:06,240.MTA_ConsumeV3.INFO ==================================================
-2024-06-12 20:29:07,628.MTA_ConsumeV3.INFO  [*] Ready for work. To exit press CTRL+C
-2024-06-12 20:29:17,768.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 00:00: 143 Passengers
-2024-06-12 20:29:17,768.MTA_ConsumeV3.INFO [x] Received
-2024-06-12 20:29:17,768.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 00:00: 20 Passengers
-2024-06-12 20:30:17,805.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 01:00: 55 Passengers
-2024-06-12 20:30:17,818.MTA_ConsumeV3.INFO [x] Received
-2024-06-12 20:30:17,819.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 01:00: 6 Passengers
-2024-06-12 20:31:17,836.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 02:00: 39 Passengers
-2024-06-12 20:31:17,853.MTA_ConsumeV3.INFO [x] Received
-2024-06-12 20:31:17,854.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 02:00: 11 Passengers
-2024-06-12 20:32:17,872.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 03:00: 50 Passengers
-2024-06-12 20:32:17,901.MTA_ConsumeV3.INFO [x] Received
-2024-06-12 20:32:17,902.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 03:00: 10 Passengers
-2024-06-12 20:33:17,921.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 04:00: 219 Passengers
-2024-06-12 20:33:17,949.MTA_ConsumeV3.INFO [x] Received
-2024-06-12 20:33:17,950.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 04:00: 19 Passengers
-2024-06-12 20:34:17,961.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 05:00: 928 Passengers
-2024-06-12 20:34:17,997.MTA_ConsumeV3.INFO [x] Received
-2024-06-12 20:34:17,998.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 05:00: 74 Passengers
-2024-06-12 20:36:16,898.MTA_ConsumeV3.INFO KeyboardInterrupt. Stopping the Program
+2024-06-12 20:49:12,413.MTA_ConsumeV3.INFO ==================================================
+2024-06-12 20:49:12,413.MTA_ConsumeV3.INFO Today is 2024-06-12 at 08:49 PM
+2024-06-12 20:49:12,413.MTA_ConsumeV3.INFO Running on: nt Windows 10
+2024-06-12 20:49:12,413.MTA_ConsumeV3.INFO Python version:  3.12.3
+2024-06-12 20:49:12,413.MTA_ConsumeV3.INFO Python path: C:\Users\Tower\anaconda3\envs\RabbitEnv
+2024-06-12 20:49:12,413.MTA_ConsumeV3.INFO Working dir: C:\Users\Tower\Documents\ACoffinCSIS44671\streaming-07-FinalMTA
+2024-06-12 20:49:12,413.MTA_ConsumeV3.INFO ==================================================
+2024-06-12 20:49:13,163.MTA_ConsumeV3.INFO  [*] Ready for work. To exit press CTRL+C
+2024-06-12 20:49:29,909.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 00:00: 143 Passengers
+2024-06-12 20:49:29,909.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:49:29,909.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 00:00: 20 Passengers
+2024-06-12 20:50:29,936.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 01:00: 55 Passengers
+2024-06-12 20:50:29,965.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:50:29,966.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 01:00: 6 Passengers
+2024-06-12 20:51:29,983.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 02:00: 39 Passengers
+2024-06-12 20:51:30,026.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:51:30,026.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 02:00: 11 Passengers
+2024-06-12 20:52:30,059.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 03:00: 50 Passengers
+2024-06-12 20:52:30,083.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:52:30,084.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 03:00: 10 Passengers
+2024-06-12 20:53:30,105.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 04:00: 219 Passengers
+2024-06-12 20:53:30,133.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:53:30,135.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 04:00: 19 Passengers
+2024-06-12 20:54:30,145.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 05:00: 928 Passengers
+2024-06-12 20:54:30,153.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:54:30,153.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 05:00: 74 Passengers
+2024-06-12 20:55:30,171.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 06:00: 1598 Passengers
+2024-06-12 20:55:30,186.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:55:30,202.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 06:00: 133 Passengers
+2024-06-12 20:56:25,082.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 00:00: 143 Passengers
+2024-06-12 20:56:25,099.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:56:25,099.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 00:00: 20 Passengers
+2024-06-12 20:56:35,120.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 01:00: 55 Passengers
+2024-06-12 20:56:35,148.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:56:35,149.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 01:00: 6 Passengers
+2024-06-12 20:56:45,167.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 02:00: 39 Passengers
+2024-06-12 20:56:45,195.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:56:45,196.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 02:00: 11 Passengers
+2024-06-12 20:56:55,214.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 03:00: 50 Passengers
+2024-06-12 20:56:55,241.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:56:55,242.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 03:00: 10 Passengers
+2024-06-12 20:57:05,261.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 04:00: 219 Passengers
+2024-06-12 20:57:05,287.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:57:05,288.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 04:00: 19 Passengers
+2024-06-12 20:57:15,307.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 05:00: 928 Passengers
+2024-06-12 20:57:15,333.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:57:15,334.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 05:00: 74 Passengers
+2024-06-12 20:57:25,352.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 06:00: 1598 Passengers
+2024-06-12 20:57:25,379.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:57:25,380.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 06:00: 133 Passengers
+2024-06-12 20:57:35,397.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 07:00: 2416 Passengers
+2024-06-12 20:57:35,421.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:57:35,422.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 07:00: 160 Passengers
+2024-06-12 20:57:45,438.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 08:00: 2384 Passengers
+2024-06-12 20:57:45,467.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:57:45,468.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 08:00: 268 Passengers
+2024-06-12 20:57:55,486.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 09:00: 1704 Passengers
+2024-06-12 20:57:55,512.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:57:55,513.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 09:00: 100 Passengers
+2024-06-12 20:58:05,531.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 10:00: 1259 Passengers
+2024-06-12 20:58:05,557.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:58:05,558.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 10:00: 55 Passengers
+2024-06-12 20:58:15,577.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 11:00: 939 Passengers
+2024-06-12 20:58:15,604.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:58:15,605.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 11:00: 34 Passengers
+2024-06-12 20:58:25,623.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 12:00: 1037 Passengers
+2024-06-12 20:58:25,649.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:58:25,650.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 12:00: 53 Passengers
+2024-06-12 20:58:35,668.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 13:00: 1056 Passengers
+2024-06-12 20:58:35,695.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:58:35,696.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 13:00: 45 Passengers
+2024-06-12 20:58:45,714.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 14:00: 1119 Passengers
+2024-06-12 20:58:45,714.MTA_ConsumeV3.INFO 
+                        ************************ [STATION 447 BUSY ALERT!!!!] *****************************
+                        * Station 447 is busier than normal
+                        * In the past 3 hours ther have been 1297 people
+                        Please Adjsut your commute accordingly.
+                        *************************************************************************
+                        
+2024-06-12 20:58:45,741.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:58:45,741.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 14:00: 107 Passengers
+2024-06-12 20:58:55,760.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 15:00: 1412 Passengers
+2024-06-12 20:58:55,788.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:58:55,789.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 15:00: 414 Passengers
+2024-06-12 20:59:05,808.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 16:00: 1438 Passengers
+2024-06-12 20:59:05,835.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:59:05,836.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 16:00: 456 Passengers
+2024-06-12 20:59:15,854.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 17:00: 1542 Passengers
+2024-06-12 20:59:15,882.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:59:15,882.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 17:00: 373 Passengers
+2024-06-12 20:59:25,902.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 18:00: 1172 Passengers
+2024-06-12 20:59:25,927.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:59:25,928.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 18:00: 162 Passengers
+2024-06-12 20:59:35,945.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 19:00: 776 Passengers
+2024-06-12 20:59:35,972.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:59:35,973.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 19:00: 65 Passengers
+2024-06-12 20:59:45,991.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 20:00: 679 Passengers
+2024-06-12 20:59:46,018.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:59:46,019.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 20:00: 43 Passengers
+2024-06-12 20:59:56,038.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 21:00: 627 Passengers
+2024-06-12 20:59:56,065.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:59:56,066.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 21:00: 32 Passengers
+2024-06-12 21:00:06,084.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 22:00: 493 Passengers
+2024-06-12 21:00:06,114.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 21:00:06,114.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 22:00: 22 Passengers
+2024-06-12 21:00:06,114.MTA_ConsumeV3.INFO 
+                        ************************ [STATION 463 BUSY ALERT!!!!] *****************************
+                        * Station 463 is busier than normal
+                        * In the past 3 hours ther have been 392 people
+                        Please Adjsut your commute accordingly.
+                        *************************************************************************
+                        
+2024-06-12 21:00:16,133.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 23:00: 221 Passengers
+2024-06-12 21:00:16,133.MTA_ConsumeV3.INFO 
+                        ************************ [STATION 447 BUSY ALERT!!!!] *****************************
+                        * Station 447 is busier than normal
+                        * In the past 3 hours ther have been 1217 people
+                        Please Adjsut your commute accordingly.
+                        *************************************************************************
+                        
+2024-06-12 21:00:16,160.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 21:00:16,162.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 23:00: 58 Passengers
+2024-06-12 21:00:16,162.MTA_ConsumeV3.INFO 
+                        ************************ [STATION 463 BUSY ALERT!!!!] *****************************
+                        * Station 463 is busier than normal
+                        * In the past 3 hours ther have been 398 people
+                        Please Adjsut your commute accordingly.
+                        *************************************************************************
+                        
+2024-06-12 21:00:26,182.MTA_ConsumeV3.INFO [Station 447]: 02/02/22 00:00: 106 Passengers
+2024-06-12 21:00:26,182.MTA_ConsumeV3.INFO 
+                        ************************ [STATION 447 BUSY ALERT!!!!] *****************************
+                        * Station 447 is busier than normal
+                        * In the past 3 hours ther have been 1436 people
+                        Please Adjsut your commute accordingly.
+                        *************************************************************************
+                        
+2024-06-12 21:00:26,204.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 21:00:26,204.MTA_ConsumeV3.INFO [Station 463]: 02/02/22 00:00: 17 Passengers
+2024-06-12 21:00:26,206.MTA_ConsumeV3.INFO 
+                        ************************ [STATION 463 BUSY ALERT!!!!] *****************************
+                        * Station 463 is busier than normal
+                        * In the past 3 hours ther have been 356 people
+                        Please Adjsut your commute accordingly.
+                        *************************************************************************
+                        
+2024-06-12 21:00:36,222.MTA_ConsumeV3.INFO [Station 447]: 02/02/22 01:00: 42 Passengers
+2024-06-12 21:00:36,222.MTA_ConsumeV3.INFO 
+                        ************************ [STATION 447 BUSY ALERT!!!!] *****************************
+                        * Station 447 is busier than normal
+                        * In the past 3 hours ther have been 1130 people
+                        Please Adjsut your commute accordingly.
+                        *************************************************************************
+                        
+2024-06-12 21:00:36,222.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 21:00:36,222.MTA_ConsumeV3.INFO [Station 463]: 02/02/22 01:00: 7 Passengers
+2024-06-12 21:00:36,222.MTA_ConsumeV3.INFO 
+                        ************************ [STATION 463 BUSY ALERT!!!!] *****************************
+                        * Station 463 is busier than normal
+                        * In the past 3 hours ther have been 155 people
+                        Please Adjsut your commute accordingly.
+                        *************************************************************************
+                        
+2024-06-12 21:00:46,250.MTA_ConsumeV3.INFO [Station 447]: 02/02/22 02:00: 45 Passengers
+2024-06-12 21:00:46,294.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 21:00:46,294.MTA_ConsumeV3.INFO [Station 463]: 02/02/22 02:00: 8 Passengers
+2024-06-12 21:00:56,314.MTA_ConsumeV3.INFO [Station 447]: 02/02/22 03:00: 50 Passengers
+2024-06-12 21:00:56,341.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 21:00:56,342.MTA_ConsumeV3.INFO [Station 463]: 02/02/22 03:00: 6 Passengers
+2024-06-12 21:01:06,359.MTA_ConsumeV3.INFO KeyboardInterrupt. Stopping the Program
+2024-06-12 21:01:06,359.MTA_ConsumeV3.INFO 
+closing connection. Goodby
+

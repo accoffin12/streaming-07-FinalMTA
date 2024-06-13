@@ -136,8 +136,8 @@ try:
                 logger.info(f'[x] Sent: {message} to {Station463_queue}')
 
                 # Set sleep for 60 seconds before reading the next row:
-                time.sleep(60)
-                #time.sleep(5) # Altered to Test Connection
+                #time.sleep(60)
+                time.sleep(10) # Altered to Test Connection
 except KeyboardInterrupt:
         print()
         print(" User interrupted streaming process.")
