@@ -1,7 +1,27 @@
+"""
+Created by: A. C. Coffin
+Date 12 June 2024
+
+*** Consumer V3 ***
+
+This producer was designed to read through "Data_MTAAlerts.csv" a file was was modified from a generated output from ConsumerV2. 
+The Producer will offer RabbitMQ, create a connection to RabbitMQ servers, read in the data from the CSV and then set up a message.
+The Timestamps have to be altered because in this case we are using struct encoding. 
+Structs were selected because it isn't as sensetive to version issues as pickle, and offered an opportunity to improve on this skill.
+
+ONLY TWO stations are used due to time constraints.
+
+---
+
+Base Code Written By: Denise Case
+Date: January 15, 2023
+"""
+
 import pika
 import sys
 import webbrowser
 import csv
+import struct
 from utils.util_logger import setup_logger
 from datetime import datetime
 import time
@@ -52,8 +72,8 @@ def send_message(host: str, queue_name: str, message: str):
         
         # Delete existing queues and declares them anew to clear previous queue information.
         # use the channel to declare a durable queue for each of the queues.
-        ch.queue_delete(Station463_queue)
-        ch.queue_delete(Station447_queue)
+        #ch.queue_delete(Station463_queue)
+        #ch.queue_delete(Station447_queue)
         
 
         # use the channel to declare a durable queue
@@ -90,31 +110,39 @@ def main(host: str, input_file: str):
         Comments above the code are reffering to the code in the next line and its function.
         """
 try:
-        with open(input_file_name, 'r', newline='') as input_file:
+        with open(input_file_name, 'r', newline='', encoding='utf-8') as input_file:
             reader = csv.reader(input_file)
             next(reader)
             # reading rows from csv
             for row in reader:
-                transit_timestamp = row[0]
+                transit_timestamp_str = row[0]
                 Station447 = row[1]
                 Station463 = row[2]
 
-                
-                
+                # Converting timestamp to "%m/%d/%y %H:%M"
+                transit_timestamp = datetime.strptime(transit_timestamp_str, "%m/%d/%y %H:%M:%S")
+
+
                 # Using an f string to send data with timestamp to send data to Station447_queue
-                message = (f"{Station447_queue} Reading = {transit_timestamp}; Ridership = {Station447}").encode()
+                #message = (f"{Station447_queue} Reading = {transit_timestamp}; Ridership = {Station447}").encode()
+                message = struct.pack('=QI', int(transit_timestamp.timestamp()), int(Station447))
                 send_message(host, "Station-447", message)
                 logger.info(f'[x] Sent: {message} to {Station447_queue}')
 
                 # Using an f string to send data to Station463_queue
-                message = (f"{Station463_queue} Reading = {transit_timestamp}; Ridership = {Station463}").encode()
+                #message = (f"{Station463_queue} Reading = {transit_timestamp}; Ridership = {Station463}").encode()
+                message = struct.pack('=QI', int(transit_timestamp.timestamp()), int(Station463))
                 send_message(host, "Station-463", message)
                 logger.info(f'[x] Sent: {message} to {Station463_queue}')
 
                 # Set sleep for 60 seconds before reading the next row:
                 time.sleep(60)
-                
-
+                #time.sleep(5) # Altered to Test Connection
+except KeyboardInterrupt:
+        print()
+        print(" User interrupted streaming process.")
+        logger.info("KeyboardInterrupt. Stopping the Program")
+        sys.exit(0)                
 except FileNotFoundError:
          logger.error("CSV file not found")
          sys.exit(1)
@@ -122,10 +150,6 @@ except ValueError as e:
          logger.error(f"An unecpected error has occured: {e}")
          sys.exit(1)  
  
-   
-
-
-
 # Standard Python idiom to indicate main program entry point
 # This allows us to import this module and use its functions
 # without executing the code below.

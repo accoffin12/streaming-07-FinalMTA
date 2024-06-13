@@ -1,8 +1,20 @@
-2024-06-12 18:54:47,299.MTA_ProducerV3.INFO ==================================================
-2024-06-12 18:54:47,299.MTA_ProducerV3.INFO Today is 2024-06-12 at 06:54 PM
-2024-06-12 18:54:47,299.MTA_ProducerV3.INFO Running on: nt Windows 10
-2024-06-12 18:54:47,299.MTA_ProducerV3.INFO Python version:  3.11.4
-2024-06-12 18:54:47,299.MTA_ProducerV3.INFO Python path: C:\Users\Tower\AppData\Local\Programs\Python\Python311
-2024-06-12 18:54:47,299.MTA_ProducerV3.INFO Working dir: C:\Users\Tower\Documents\ACoffinCSIS44671\streaming-07-FinalMTA
-2024-06-12 18:54:47,299.MTA_ProducerV3.INFO ==================================================
-2024-06-12 18:54:47,299.MTA_ProducerV3.ERROR CSV file not found
+2024-06-12 20:29:17,678.MTA_ProducerV3.INFO ==================================================
+2024-06-12 20:29:17,678.MTA_ProducerV3.INFO Today is 2024-06-12 at 08:29 PM
+2024-06-12 20:29:17,678.MTA_ProducerV3.INFO Running on: nt Windows 10
+2024-06-12 20:29:17,678.MTA_ProducerV3.INFO Python version:  3.11.4
+2024-06-12 20:29:17,678.MTA_ProducerV3.INFO Python path: C:\Users\Tower\AppData\Local\Programs\Python\Python311
+2024-06-12 20:29:17,678.MTA_ProducerV3.INFO Working dir: C:\Users\Tower\Documents\ACoffinCSIS44671\streaming-07-FinalMTA
+2024-06-12 20:29:17,678.MTA_ProducerV3.INFO ==================================================
+2024-06-12 20:29:17,768.MTA_ProducerV3.INFO [x] Sent: b'`\xcc\xf8a\x00\x00\x00\x00\x8f\x00\x00\x00' to Station-447
+2024-06-12 20:29:17,768.MTA_ProducerV3.INFO [x] Sent: b'`\xcc\xf8a\x00\x00\x00\x00\x14\x00\x00\x00' to Station-463
+2024-06-12 20:30:17,806.MTA_ProducerV3.INFO [x] Sent: b'p\xda\xf8a\x00\x00\x00\x007\x00\x00\x00' to Station-447
+2024-06-12 20:30:17,819.MTA_ProducerV3.INFO [x] Sent: b'p\xda\xf8a\x00\x00\x00\x00\x06\x00\x00\x00' to Station-463
+2024-06-12 20:31:17,836.MTA_ProducerV3.INFO [x] Sent: b"\x80\xe8\xf8a\x00\x00\x00\x00'\x00\x00\x00" to Station-447
+2024-06-12 20:31:17,855.MTA_ProducerV3.INFO [x] Sent: b'\x80\xe8\xf8a\x00\x00\x00\x00\x0b\x00\x00\x00' to Station-463
+2024-06-12 20:32:17,872.MTA_ProducerV3.INFO [x] Sent: b'\x90\xf6\xf8a\x00\x00\x00\x002\x00\x00\x00' to Station-447
+2024-06-12 20:32:17,904.MTA_ProducerV3.INFO [x] Sent: b'\x90\xf6\xf8a\x00\x00\x00\x00\n\x00\x00\x00' to Station-463
+2024-06-12 20:33:17,921.MTA_ProducerV3.INFO [x] Sent: b'\xa0\x04\xf9a\x00\x00\x00\x00\xdb\x00\x00\x00' to Station-447
+2024-06-12 20:33:17,950.MTA_ProducerV3.INFO [x] Sent: b'\xa0\x04\xf9a\x00\x00\x00\x00\x13\x00\x00\x00' to Station-463
+2024-06-12 20:34:17,961.MTA_ProducerV3.INFO [x] Sent: b'\xb0\x12\xf9a\x00\x00\x00\x00\xa0\x03\x00\x00' to Station-447
+2024-06-12 20:34:17,999.MTA_ProducerV3.INFO [x] Sent: b'\xb0\x12\xf9a\x00\x00\x00\x00J\x00\x00\x00' to Station-463
+2024-06-12 20:34:46,277.MTA_ProducerV3.INFO KeyboardInterrupt. Stopping the Program

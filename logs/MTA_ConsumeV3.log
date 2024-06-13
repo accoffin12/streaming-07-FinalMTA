@@ -1,0 +1,27 @@
+2024-06-12 20:29:06,225.MTA_ConsumeV3.INFO ==================================================
+2024-06-12 20:29:06,225.MTA_ConsumeV3.INFO Today is 2024-06-12 at 08:29 PM
+2024-06-12 20:29:06,240.MTA_ConsumeV3.INFO Running on: nt Windows 10
+2024-06-12 20:29:06,240.MTA_ConsumeV3.INFO Python version:  3.12.3
+2024-06-12 20:29:06,240.MTA_ConsumeV3.INFO Python path: C:\Users\Tower\anaconda3\envs\RabbitEnv
+2024-06-12 20:29:06,240.MTA_ConsumeV3.INFO Working dir: C:\Users\Tower\Documents\ACoffinCSIS44671\streaming-07-FinalMTA
+2024-06-12 20:29:06,240.MTA_ConsumeV3.INFO ==================================================
+2024-06-12 20:29:07,628.MTA_ConsumeV3.INFO  [*] Ready for work. To exit press CTRL+C
+2024-06-12 20:29:17,768.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 00:00: 143 Passengers
+2024-06-12 20:29:17,768.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:29:17,768.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 00:00: 20 Passengers
+2024-06-12 20:30:17,805.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 01:00: 55 Passengers
+2024-06-12 20:30:17,818.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:30:17,819.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 01:00: 6 Passengers
+2024-06-12 20:31:17,836.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 02:00: 39 Passengers
+2024-06-12 20:31:17,853.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:31:17,854.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 02:00: 11 Passengers
+2024-06-12 20:32:17,872.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 03:00: 50 Passengers
+2024-06-12 20:32:17,901.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:32:17,902.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 03:00: 10 Passengers
+2024-06-12 20:33:17,921.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 04:00: 219 Passengers
+2024-06-12 20:33:17,949.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:33:17,950.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 04:00: 19 Passengers
+2024-06-12 20:34:17,961.MTA_ConsumeV3.INFO [Station 447]: 02/01/22 05:00: 928 Passengers
+2024-06-12 20:34:17,997.MTA_ConsumeV3.INFO [x] Received
+2024-06-12 20:34:17,998.MTA_ConsumeV3.INFO [Station 463]: 02/01/22 05:00: 74 Passengers
+2024-06-12 20:36:16,898.MTA_ConsumeV3.INFO KeyboardInterrupt. Stopping the Program
