@@ -24,7 +24,7 @@ Traditionally Log files are not uploaded to GitHub, however, as this is a stream
 5. RabbitMQ Admin Panel
 6. Terminal: MTA_Line7V2.py
 
-![LqL5L7ConsumeV2Test3.PNG](Screenshots/LqL5L7ConsumeV2Test3.PNG)
+![LqL5L7ConsumeV2Test3.PNG](ScreenShots/LqL5L7ConsumeV2Test3.PNG)
 
 # Table of Contents
 1. [File List](File_List)
