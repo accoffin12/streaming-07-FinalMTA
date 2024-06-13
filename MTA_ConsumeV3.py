@@ -1,3 +1,25 @@
+"""
+Created by: A. C. Coffin
+Date: 12 June 2024
+
+*** Use with "MTA_ProducerV3.py" ***
+
+This Consumer was designed to generate alerts based on the number of riders within a station using Rolling Window.
+The deque length was desided based on the number of readigns desired ever 3 hours over a 24 hour period.
+This script uses structs.
+
+1. Establishes Variables + deque length
+2. Decodes the message + adds ridership number to the deque
+3. Based on the data in the deque versus there being a specific number of people for a station to be busy an Alert is generated
+4. Connection to RabbitMQ
+5. Standard Entry Point
+
+----
+
+Base Code Author: Denise Case
+Date: January 15, 2023
+"""
+
 import pika
 import sys
 import time
