@@ -36,13 +36,16 @@ Traditionally Log files are not uploaded to GitHub, however, as this is a stream
 6. [Modifications of Data](Modifications_of_Data)
 7. [Creating an Environment & Installs](Creating_an_Enviroment_&_Installs)
 8. [Method](Method)
-    * [8a1. MTA_producerV1.py](8a1._MTA_ProducerV1.py)
+    * [8a1. MTA_producerV1](8a1._MTA_ProducerV1)
     * [8a2. MTA_ProducerV2](8a2._MTA_ProducerV2)
-    * [8b1. MTA_ConsumerV1.py](8b1._MTA_ConsumerV1.py)
+    * [8a3. MTA_ProducerV3](8a3._MTA_ProducerV3)
+    * [8b1. MTA_ConsumerV1](8b1._MTA_ConsumerV1)
     * [8b2. MTA_ConsumeV2 Group](8b2._MTA_ConsumeV2_Group)
+    * [8b3. ConsumerV3](8b3._ConsumerV3)
 9. [Executing the Code](Executing_the_Code)
     * [9a. ProducerV1/ConsumerV1](9a._ProducerV1/ConsumerV1)
     * [9b. ProducerV2/ConsumerV2](9b._ProducerV2/ConsumerV2)
+    * [9c. ProducerV3/ConsumerV3](9c._ProducerV3/ConsumerV3)
 10. [Results](Results)
 11. [References](References)
 
@@ -66,6 +69,8 @@ Traditionally Log files are not uploaded to GitHub, however, as this is a stream
 | MTA_ConsumeLine5V2.py | main repo | python script |
 | MTA_ConsumeLine7V2.py | main repo | python script |
 | MTA_ConsumeLineQV2.py | main repo | python script |
+| MTA_ProducerV3.py | main repo | python script |
+| MTA_ConsumeV3.py | main repo | python script |
 | Data_MTA_Num7.csv | Output CSV (V1, V2)/Output_Data_ConsumeV1 | CSV |
 | Data_MTA_Line5.csv | Output CSV (V1, V2)/Output_Data_ConsumeV2(s) | CSV |
 | Data_MTA_Line5.csv | Output CSV (V1, V2)/Output_Data_ConsumeV2(s) | CSV |
@@ -74,6 +79,8 @@ Traditionally Log files are not uploaded to GitHub, however, as this is a stream
 | MTA_ConsumeLine7V2.log | logs | log |
 | MTA_ConsumeLineQV2.log | logs | log |
 | MTA_ProducerV2.log | logs | log |
+| MTA_ProducerV3.log | logs | log |
+| MTA_ConsumeV3.log | logs | log |
 
 # 2. Machine Specs
  Date and Time: 2024-06-07 at 02:15 PM
@@ -207,18 +214,21 @@ Be sure to do each individually to install Pika in the environment. You have to 
 # 8. Method
 In this assignment base code that was developed by Dr. Case in her repository, "[streaming-04-multiple-consumers](https://github.com/denisecase/streaming-04-multiple-consumers)" was utilized in combination with previous work completed in "streaming-04-bonus-ACoffin". Examples of base codes can be found in the BaseCode folder. For quick navigation see the following sections:
 
-* [8a1. MTA_producerV1.py](8a1._MTA_ProducerV1.py)
+* [8a1. MTA_producerV1](8a1._MTA_ProducerV1)
 * [8a2. MTA_ProducerV2](8a2._MTA_ProducerV2)
-* [8b1. MTA_ConsumerV1.py](8b1._MTA_ConsumerV1.py)
+* [8a3. MTA_ProducerV3](8a3._MTA_ProducerV3)
+* [8b1. MTA_ConsumerV1](8b1._MTA_ConsumerV1)
 * [8b2. MTA_ConsumeV2 Group](8b2._MTA_ConsumeV2_Group)
+* [8b3. ConsumerV3](8b3._ConsumerV3)
 
 ## 8a. Producer(s):
 Each section explains a different Producer developed for this project. All of the producers have a sleep time set to every 60 seconds. Since the original data is generated hourly, using 60 seconds as a sleep time will simulate the passage of time with each seconds representing a minute that passes. 
 
-* [8a1. MTA_producerV1.py](8a1._MTA_ProducerV1.py)
+* [8a1. MTA_producerV1](8a1._MTA_ProducerV1)
 * [8a2. MTA_ProducerV2](8a2._MTA_ProducerV2)
+* [8a3. MTA_ProducerV3](8a3._MTA_ProducerV3)
 
-### 8a1. MTA_ProducerV1.py
+### 8a1. MTA_ProducerV1
 This script was designed to collect only sepcific aspect of information from the stream, as opposed to the entire line. In this instance the objective was to collect data pertaining to: transit_timestamp, station_complex_id, station_complex, borough, and ridership. This intial producer demonstrates the ability of the user to select specific columns, without having to collect all of the data. The queue name used was Num7Sub_queue, this was due to it's existance and use with a previous project. The Consumer was specifically designed to delete the queue and then reaccess it, ensuring that there wasn't data contamination.
 
 #### Selecting Columns
@@ -298,20 +308,33 @@ Next we sort subway_data into queues based on the subway Line and pack the messa
 Similar to the other Producer, a KeyInterrrupt was added. This addition was to ensure that if the user terminated the process early it was handled properly and didn't result in unusual terminal readings or an improper disconnect. 
 
 ## 8a3. MTA_ProducerV3
-The average number of passengers for each station:
- Station 463 = 85.916 or 86 passengers
- Station 447 = 988.024 or 989 passengers
-These numbers were found doing a basic Excel Average, and for our purposes we will be using these numbers to determine what we consider as busy for a sation. In order to create our alerts and with the Average in mind we will be using the following:
-Station 463 is busy if passengers > 100
-Station 447 is busy if passengers > 1000
+This Producer was designed to read the CSV file "Data_MTAAlerts.csv" and then send the messages to seperate queues: "Station-447" and "Station-463". Similar to the process of sending the messages in the other two Consumers a connection was made to RabbitMQ similar to the basecode, and the queues were declared and made durrable. The main difference in this method was that structs were used.
+
+Structs were selected as it was an encoding technique I struggled with previously, and are not as sensitive to version changes as pickles are. When handling a struct the data has to be handeled in a specific way, especailly timestamps. 
+
+```
+# Converting timestamp to "%m/%d/%y %H:%M"
+transit_timestamp = datetime.strptime(transit_timestamp_str, "%m/%d/%y %H:%M:%S")
+```
+
+Once the timestamps are converted, then it is possible to execute the following:
+
+```
+# Using an f string to send data with timestamp to send data to Station447_queue
+                #message = (f"{Station447_queue} Reading = {transit_timestamp}; Ridership = {Station447}").encode()
+                message = struct.pack('=QI', int(transit_timestamp.timestamp()), int(Station447))
+                send_message(host, "Station-447", message)
+                logger.info(f'[x] Sent: {message} to {Station447_queue}')
+```
 
 ## 8b. Consumer(s)
 This project contains multiple consumers, each of them was designed to output a CSV but decodes the message using different processes. For example "MTA_ConsumerV1.py" uses `decode()` where as the V2 series of Consumers uses pickling. 
 
-* [8b1. MTA_ConsumerV1.py](8b1._MTA_ConsumerV1.py)
+* [8b1. MTA_ConsumerV1](8b1._MTA_ConsumerV1)
 * [8b2. MTA_ConsumeV2 Group](8b2._MTA_ConsumeV2_Group)
+* [8b3. ConsumerV3](8b3._ConsumerV3)
 
-### 8b1. MTA_ConsumerV1.py
+### 8b1. MTA_ConsumerV1
 This Consumer is designed to decode the data collected from MTA_ProducerV1.py and then splits the original message into sections using ','. By doing this processes it allows us to prepare the message to be added to a CSV file for later use.
 
 The following function was used to write the data to the CSV file:
@@ -371,17 +394,62 @@ Once each line is unpickled, then the data is written to a CSV. The process to w
 ```
 By using `if file.tell() == 0`, we are dictating that if the file is empty to have the writer add the "column_headers". The information for "column_headers" is listed under variables.
 
+**Alerts Generated:**
+![ProConV3Alert1.PNG](ScreenShots/ProConV3Alert1.PNG)
+![ProConV3Alert2.PNG](Screenshots/ProConV3Alert2.PNG)
+
 #### main
 There were a few alteration made to `main`. The first being that the consumer is instructed to delete the queue before declaring it. By deleting the queue it prevents data that may have not cleared the queue from interfearing with the information processed by the Consumer and then added to the assciated CSV. Additionally the following line was added to prevent the Consumer from deleting the queue before processsing the emssage. 
 ```
 channel.basic_consume( queue=qn, on_message_callback=callback, auto_ack=False)
 ```
 
+### 8b3. ConsumerV3
+The average number of passengers for each station:
+ Station 463 = 85.916 or 86 passengers
+ Station 447 = 988.024 or 989 passengers
+These numbers were found doing a basic Excel Average, and for our purposes we will be using these numbers to determine what we consider as busy for a sation. In order to create our alerts and with the Average in mind we will be using the following:
+Station 463 is busy if passengers > 100
+Station 447 is busy if passengers > 1000
+
+The following dequeue lengths were used as the objective was to determine if a station was busy every three hours, which meant a total of 8 readings in the deque.
+```
+Station447_deque = deque(maxlen=8) 
+Station463_deque = deque(maxlen=8)
+```
+#### Callback Functions
+Each station was given an individual callback function. This allows us to run through the messages and generate an alert for each based on the number of passengers being entered into each deque. The first step of this is to unpack the data.
+```
+# Clean the body of the message to find the temperature:
+    body_decode = struct.unpack('=QI',body)
+    transit_timestamp, Station447 = body_decode
+    
+    # Converst the timestamp back to a string for logging
+    transit_timestamp_str = datetime.fromtimestamp(transit_timestamp).strftime("%m/%d/%y %H:%M")
+    logger.info(f"[Station 447]: {transit_timestamp_str}: {Station447} Passengers")
+```
+Once the data was unpacked the following logic was applied to determine if the station was in fact busy.
+```
+if len(Station447_deque) == Station447_deque.maxlen:
+        if Station447_deque[0] - Station447 >= 1000:
+            Station447_change = Station447_deque[0] - Station447
+```
+Finally based on the response a notification was generated. 
+#### main function
+This function was designed to connect to RabbitMQ. Once connected it will delete the queue and create a queue. After establishing the prefetch_count, the way the channel was to consume the messages was added.
+
+```
+channel.basic_consume( queue="Station-447", on_message_callback=Station447_callback, auto_ack=False)
+channel.basic_consume( queue="Station-463", on_message_callback=Station463_callback, auto_ack=False)
+```
+Finally the exception handling was added, along with the entry point, which in this case focuses on main.
+
 # 9. Executing the Code
 Please go to each subsection prior to execution for the process on how to execute the Producer and Consumer Pairs. Follow each of the steps carefully as there is a function built into the consuemrs to delete the queue before establishing the connection. Each Consumer MUST be run first.
 
 * [9a. ProducerV1/ConsumerV1](9a._ProducerV1/ConsumerV1)
 * [9b. ProducerV2/ConsumerV2](9b._ProducerV2/ConsumerV2)
+* [9c. ProducerV3/ConsumerV3](9c._ProducerV3/ConsumerV3)
 
 ## 9a. ProducerV1/ConsumerV1
 1. Open 1 Anaconda Prompt Terminal
@@ -390,7 +458,7 @@ Please go to each subsection prior to execution for the process on how to execut
 cd Dcuments\folder_where_repo_is\ 
 cd Documents\ACoffinCSIS44671\streaming-07-Final # This is where the file is located on my computer
 ```
-3. Activate the created RabbitEnv within each terminal.
+3. Activate the created RabbitEnv within the terminal.
 ```
 conda activate RabbitEnv
 ```
@@ -436,6 +504,31 @@ The Anaconda terminal should look like the following:
 
 Allow the code to run through the lines of the CSV, the Producer will close on its own but rememebr to close each of the Consumer terminals. If an escape from the Producer is requried use Ctrl + C.
 
+## 9c. ProducerV3/ConsumerV3
+1. Open 1 Anaconda Prompt Terminal
+2. In the terminal set the file path to where the repo sits. Use the following structure to access this file path:
+```
+cd Dcuments\folder_where_repo_is\ 
+cd Documents\ACoffinCSIS44671\streaming-07-Final # This is where the file is located on my computer
+```
+3. Activate the created RabbitEnv within the terminal.
+```
+conda activate RabbitEnv
+```
+The terminal should look similar to this:
+![ActivatedRabbitEnvTerminalSetUp.PNG](ScreenShots/ActivatedRabbitEnvTerminalSetup.PNG)
+
+4. In the Anaconda terminal run the Consumer "MTA_ConsumeV3.py"
+```
+python MTA_ConsumerV1.py
+```
+5. In a VS Code terminal using the previously activated .venv execute the following:
+```
+MTA_ProducerV3.py
+```
+
+Allow the code to run through the lines of the CSV. Remember that the process must be itnerupped in the terminal containing the Consumer as it will not terminate on its own. If escape on the Prodcuer is necessary use Ctrl + C.
+
 # 10. Results
 Using multiple consumers on a compelx data stream can be beneficial when handling massive amounts of data. It's important to note that each Consumer set was designed to execute a specific series of tasks to produce a CSV output. While the process of writing a CSV is not complex to code, it can be labor intensive for a computer. The outputs for each of the scripts can be found in the Output CSV(V1, V2). The Producer and Consumers were run in stages while being developed as tests. For those screen shots please see the "ScreenShots" folder.
 
@@ -448,6 +541,13 @@ Using multiple consumers on a compelx data stream can be beneficial when handlin
 6. Terminal: MTA_Line7V2.py
 
 ![LqL5L7ConsumeV2Test3.PNG](Screenshots/LqL5L7ConsumeV2Test3.PNG)
+
+**Alerts Generated by V3**
+Screenshot Key:
+1. Producer Terminal
+2. Consumer Terminal
+![ProConV3Alert1.PNG](ScreenShots/ProConV3Alert1.PNG)
+![ProConV3Alert2.PNG](ScreenShots/ProConV3Alert2.PNG)
 
 # 11. References
 - MTA Subway Data from NYC Open Portal, Downloaded: 04 May 2024: [https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data)
